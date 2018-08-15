@@ -1,0 +1,12 @@
+AllCops:
+  Include:
+    - 'app/**/*'
+    - 'test/**/*'
+
+  Exclude:
+    - 'app/assets/**/*'
+    - 'app/views/**/*'
+    - 'bin/**/*'
+    - '**/*.yml'
+Documentation:
+  Enabled: false
