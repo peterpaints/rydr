@@ -1,0 +1,23 @@
+<%= form_tag(login_path, autocomplete: "on", method: "post") do %>
+<div class="email">
+  <i class="fa fa-user icon"></i>
+  <%= email_field_tag :email, nil, required: true, placeholder: "you@example.com" %>
+</div>
+<div class="password">
+  <i class="fa fa-key icon"></i>
+  <%= password_field_tag :password, '', required: true,
+  pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}',
+  placeholder: "....",
+  title: "Password must contain at least 6 characters, including UPPER/lowercase and numbers"
+  %>
+</div>
+<div class="remember">
+  <%= check_box_tag :remember_me %>
+  <p>Remember Me</p>
+</div>
+<%= submit_tag "Log In", class: "login-button" %>
+<p class="toggle-register">
+  Don't have an account?
+  <%= link_to 'Register', register_path, class: "to-register" %>
+</p>
+<% end %>
