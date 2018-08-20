@@ -1,0 +1,61 @@
+<%= stylesheet_link_tag "profile" %>
+<%= javascript_include_tag 'profile' %>
+<div class="profile">
+  <nav class="left-nav">
+    <div class="logo">
+      <%= image_tag "car-profile.svg" %>
+      <p>Rydr</p>
+    </div>
+    <div class="nav-title"><i class="fa fa-cogs"></i><span> Settings</span></div>
+    <div class="line-break"></div>
+    <button class="left-nav-link vehicles-nav">
+      <i class="fa fa-car"></i><span>VEHICLES</span>
+    </button>
+    <button class="left-nav-link notifications-nav">
+      <i class="fa fa-bell"></i><span>NOTIFICATIONS</span>
+    </button>
+    <button class="left-nav-link rides-nav">
+      <i class="fa fa-history"></i><span>RIDE HISTORY</span>
+    </button>
+    <div class="line-break"></div>
+    <button class="skip" type="button"><%= link_to "See Rides", rides_path %></button>
+    <div class="line-break"></div>
+  </nav>
+  <div class="right-container">
+    <nav class="top-nav">
+      <div class="right-top-nav">
+        <div class="notifications-icon">
+          <%= image_tag "bell_icon.svg" %>
+          <span class="badge">20</span>
+        </div>
+        <div class="current-user">
+          <%= image_tag "user.svg" %>
+          <span><%= @user.email %></span>
+        </div>
+        <div class="dropdown-button">
+          <%= image_tag "menu.svg" %>
+          <div class="dropdown-content">
+            <%= link_to "Logout", logout_path %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="filters">
+        <%= render partial: "users/partials/user_vehicle_filter" %>
+        <%= render partial: "users/partials/user_notifications_filter" %>
+        <%= render partial: "users/partials/user_rides_filter" %>
+      </div>
+      <div class="tiles">
+        <%= render partial: "users/partials/user_vehicle" %>
+        <%= render partial: "users/partials/user_vehicle" %>
+        <%= render partial: "users/partials/user_vehicle" %>
+        <%= render partial: "users/partials/user_vehicle" %>
+        <%= render partial: "users/partials/user_vehicle" %>
+        <%= render partial: "users/partials/user_notifications" %>
+      </div>
+      <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></button>
+    </div>
+  </div>
+</div>
+<%= render partial: "vehicles/partials/vehicle_form" %>

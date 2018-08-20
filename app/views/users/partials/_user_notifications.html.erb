@@ -1,0 +1,63 @@
+<%= stylesheet_link_tag "notifications" %>
+<div class="tile-container notifications-tile">
+  <span><i class="fa fa-check"></i></span>
+  <div class="tile">
+    <div class="tile-title">
+      <div class="contact">
+        <%= image_tag "contact.svg" %>
+        <div class="contact-heading">CONTACT DETAILS</div>
+      </div>
+    </div>
+    <div class="tile-content">
+      <div class="phone">
+        <%= image_tag "phone.svg" %>
+        <div class="phone-number">0724714151</div>
+      </div>
+    </div>
+    <div class="tile-footer">
+      <div class="slack">
+        <%= image_tag "slack.svg" %>
+        <div class="slack-handle">@ptr</div>
+      </div>
+      <div class="update-buttons">
+        <div class="update-btn">
+          <i class="fa fa-pencil"></i>
+          <div class="update-text">Edit</div>
+        </div>
+        <div class="update-btn">
+          <i class="fa fa-trash"></i>
+          <div class="update-text">Delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tile-container notifications-tile">
+  <span><i class="fa fa-check"></i></span>
+  <div class="tile">
+    <div class="tile-title">
+      <div class="contact">
+        <%= image_tag "settings.svg" %>
+        <div class="contact-heading">PREFERENCES</div>
+      </div>
+    </div>
+    <div class="tile-content">
+      <div class="phone">
+        <%= image_tag "phone.svg" %>
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+    <div class="tile-footer">
+      <div class="slack">
+        <%= image_tag "slack.svg" %>
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
