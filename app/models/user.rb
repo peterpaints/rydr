@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   has_many :vehicles
-  has_many :rides, through: :vehicles
+  has_and_belongs_to_many :rides
 
   has_secure_password
 
