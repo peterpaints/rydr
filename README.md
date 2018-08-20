@@ -1,24 +1,63 @@
-# README
+#### Rydr
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Intro
 
-Things you may want to cover:
+An app to help you offer a coworker a ride. You log in, create a ride with an
+origin, destination, departure time and so on, and anyone interested can join
+you. No more lonely commutes home 😉
 
-* Ruby version
+Find it here: [Rydr](https://rydr.herokuapp.com)
 
-* System dependencies
+### Dev Tools
 
-* Configuration
+This are the tools I used:
+* Rails 5
+* ActiveRecord
+* PostgresQL
 
-* Database creation
+### Installation
 
-* Database initialization
+> Clone this repo to your local machine: Open terminal in any folder and type:
+```
+git clone https://github.com/peterpaints/rydr.git
+```
 
-* How to run the test suite
+> Switch to the develop branch using:
+```
+git checkout develop
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+>Run bundler to install gems (dependencies)
+```
+bundle
+```
 
-* Deployment instructions
+>Create and Migrate the dbs
+```
+rails db:setup
+```
 
-* ...
+> Finally, start the app!
+```
+rails s
+```
+
+### Contribution
+
+Feel you have something you'd like to see added? Raise a PR!
+
+### Tests
+
+> Run tests with one simple command:
+```
+rspec
+```
+
+> If that doesn't work, try:
+```
+bundle exec rspec
+```
+
+### License
+
+[The MIT License](https://github.com/peterpaints/rydr/blob/develop/LICENSE.md)
