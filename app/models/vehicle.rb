@@ -3,4 +3,11 @@
 class Vehicle < ApplicationRecord
   has_many :rides
   belongs_to :user
+
+  VALID_PLATE = /^[A-Z]{3} [0-9]{3}[A-Z]{1}$/
+
+  validates :make, :model, :license_plate, :capacity, :colour,
+            presence: { message: 'Please enter every attribute.' }
+  validates :license_plate,
+            format: { with: VALID_PLATE, message: 'Invalid plate format.' }
 end
