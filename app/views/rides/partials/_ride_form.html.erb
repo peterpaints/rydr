@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag "modal" %>
+<div id="ride-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-dismiss="modal">&times;</span>
+    <div class="modal-header">
+      <p class="modal-heading">Add a Ride</p>
+      <div class="modal-underline" />
+    </div>
+    <%= form_for :ride, url: rides_new_path do |f| %>
+      <%= f.text_field :origin, required: true, placeholder: "Where from e.g. Andela Kenya" %>
+      <%= f.text_field :destination, required: true, placeholder: "Where to e.g. Westlands" %>
+      <%= f.text_field :departure_time, required: true, placeholder: "Departing at e.g. 5.30pm" %>
+      <%= f.text_field :capacity, required: true, placeholder: "Capacity e.g. 5" %>
+      <%= f.text_field :vehicle_id, required: true, placeholder: "Which vehicle will you use?" %>
+      <div class="submit-button">
+        <%= f.submit "Add", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

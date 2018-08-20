@@ -19,11 +19,21 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def show
+    @user = User.find(params[:id])
+    restricted_access unless @user.id == logged_in?
+  end
+
   private
 
   def user_save_success
     session[:user] = @user.id
-    redirect_to profile_path
+    redirect_to user_path(@user.id)
+  end
+
+  def restricted_access
+    flash[:danger] = "You can't view that page"
+    redirect_to rides_path
   end
 
   def user_params
