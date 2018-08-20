@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :vehicles
+  has_many :rides, through: :vehicles
+
   has_secure_password
 
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
