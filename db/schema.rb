@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_17_052919) do
+ActiveRecord::Schema.define(version: 2018_08_20_222251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "rides", force: :cascade do |t|
+    t.string "origin"
+    t.string "destination"
+    t.datetime "departure_time"
+    t.integer "capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_id"
+    t.index ["vehicle_id"], name: "index_rides_on_vehicle_id"
+  end
+
+  create_table "rides_users", id: false, force: :cascade do |t|
+    t.bigint "ride_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["ride_id", "user_id"], name: "index_rides_users_on_ride_id_and_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -25,4 +42,18 @@ ActiveRecord::Schema.define(version: 2018_08_17_052919) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.string "make"
+    t.string "model"
+    t.string "license_plate"
+    t.integer "capacity"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_vehicles_on_user_id"
+  end
+
+  add_foreign_key "rides", "vehicles"
+  add_foreign_key "vehicles", "users"
 end

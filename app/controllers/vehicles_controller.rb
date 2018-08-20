@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VehiclesController < ApplicationController
   def new
     @vehicle = Vehicle.new
