@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RidesController < ApplicationController
+  before_action :require_login
+
   def new
     @ride = Ride.new
   end

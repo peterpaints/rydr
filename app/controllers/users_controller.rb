@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :require_login, only: [:edit, :show]
+
   def new
     @user = User.new
   end
@@ -10,7 +12,6 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      p @user.errors.full_messages.to_sentence
       flash[:danger] = @user.errors.full_messages.to_sentence
       redirect_to login_path
     end

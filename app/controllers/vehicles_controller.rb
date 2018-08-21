@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VehiclesController < ApplicationController
+  before_action :require_login
+
   def new
     @vehicle = Vehicle.new
   end
