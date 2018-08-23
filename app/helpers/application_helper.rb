@@ -6,12 +6,12 @@ module ApplicationHelper
     redirect_to login_path
   end
 
-  def logged_in?
+  def current_user
     session[:user]
   end
 
   def require_login
-    return if logged_in?
+    return if current_user
     unauthorized
   end
 end

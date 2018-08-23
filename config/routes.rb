@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
-  get '/rides', to: 'rides#show'
-
-  post '/vehicles/new', to: 'vehicles#create'
-  post '/rides/new', to: 'rides#create'
+  resources :vehicles
+  resources :rides
 end

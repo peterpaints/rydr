@@ -1,36 +1,57 @@
-<div class="tile-container vehicle-tile">
+<div class="tile-container-settings vehicle-tile">
   <span><i class="fa fa-check"></i></span>
-  <div class="tile">
+  <%= form_for :vehicle, url: vehicle_path, html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="vehicle">
         <%= image_tag "vehicle.svg" %>
-        <div class="make-model">Toyota Corolla</div>
+        <div class="make-model">
+          <%= f.text_field :make, required: true, value: "Toyota" %>
+          <%= f.text_field :model, required: true, value: "Corolla" %>
+        </div>
       </div>
       <div class="rides-history">Rides Completed: 5</div>
     </div>
     <div class="tile-content">
       <div class="license">
         <%= image_tag "license-plate.svg" %>
-        <div class="plate">KCR 232C</div>
+        <div class="plate">
+          <%= f.text_field :license_plate, required: true,
+          pattern: '^[A-Z]{3} [0-9]{3}[A-Z]{1}$',
+          value: "KCR 232C",
+          title: "License Plate must be in this format: KCR 232C"
+          %>
+        </div>
       </div>
       <div class="capacity">
         <%= image_tag "capacity.svg" %>
-        <div class="seating">5</div>
+        <div class="seating">
+          <%= f.text_field :capacity, required: true,
+          pattern: '^[0-9]$',
+          value: "5",
+          title: "Capacity must be a number, e.g. 5"
+          %>
+        </div>
       </div>
       <div class="color">
         <%= image_tag "palette.svg" %>
-        <div class="hue">White</div>
+        <div class="hue">
+          <%= f.text_field :color, required: true, value: "White" %>
+        </div>
       </div>
     </div>
     <div class="tile-update">
       <div class="update-btn">
         <i class="fa fa-pencil"></i>
-        <div class="update-text">Edit</div>
+        <div class="edit">Edit</div>
+      </div>
+      <div class="update-btn">
+        <i class="fa fa-save"></i>
+        <%= f.submit "Save", class: "save" %>
       </div>
       <div class="update-btn">
         <i class="fa fa-trash"></i>
-        <div class="update-text">Delete</div>
+        <div class="delete"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

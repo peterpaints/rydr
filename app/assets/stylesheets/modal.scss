@@ -1,7 +1,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1041;
   padding-top: 100px;
   left: 0;
   top: 0;
@@ -67,6 +67,14 @@
 
       &:focus {
         outline: none;
+      }
+    }
+
+    input[type="datetime-local"] {
+      &:before {
+        content: 'Date/Time?';
+        margin-right: .6em;
+        color: #95989a;
       }
     }
 

@@ -12,11 +12,9 @@
       <i class="fa fa-car"></i><span>RIDES</span>
     </button>
     <button class="left-nav-link profile-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "PROFILE", user_path(@user.id) %></span>
+      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
     </button>
-    <button class="left-nav-link notifications-nav">
-      <i class="fa fa-car"></i><span>NOTIFICATIONS</span>
-    </button>
+    <div class="line-break"></div>
   </nav>
   <div class="right-container">
     <nav class="top-nav">
@@ -41,7 +39,7 @@
       <div class="filters">
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
-      <div class="tiles">
+      <div class="tiles-rides">
         <%= render partial: "rides/partials/ride" %>
         <%= render partial: "rides/partials/ride" %>
         <%= render partial: "rides/partials/ride" %>
@@ -49,8 +47,6 @@
         <%= render partial: "rides/partials/ride" %>
         <%= render partial: "rides/partials/notifications" %>
       </div>
-      <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
     </div>
   </div>
 </div>
-<%= render partial: "rides/partials/ride_form" %>

@@ -1,6 +1,6 @@
 $text-color: rgba(153, 123, 73, 1);
-$badge-color: #4c3f54;
-$card-borders: #c6ad79, #f6c0ef, #f5a390;
+$badge-color: rgba(228, 83, 94, .85);
+$card-borders: #ff8000, #8d230f, #665600;
 
 .profile {
   display: flex;
@@ -10,7 +10,6 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
 }
 
 .left-nav {
-  // background-color: rgba(245, 245, 245, .3);
   background-color: rgba(241, 246, 248, 1);
   display: flex;
   flex-direction: column;
@@ -124,6 +123,7 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     margin-left: auto;
     margin-right: 1vw;
     width: 17vw;
+    z-index: 0;
 
     .notifications-icon {
       cursor: pointer;
@@ -159,11 +159,11 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     .dropdown-content {
       display: none;
       position: absolute;
-      right: 1vw;
+      right: .5vw;
       background-color: #f9f9f9;
-      min-width: 7vw;
+      min-width: 10vw;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
+      z-index: 9999;
 
       a {
         float: none;
@@ -201,7 +201,7 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   .profile-setting {
     font-family: 'Cantarell', sans-serif;
     font-size: 1vw;
-    color: $badge-color;
+    color: $text-color;
   }
 
   .filter-button {
@@ -222,7 +222,7 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   }
 }
 
-.tiles {
+.tiles-rides {
   // display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -234,7 +234,17 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   left: 5vw;
   overflow: scroll;
 
-  .tile-container {
+  span {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid rgba(0, 0, 0, .25);
+    border-radius: 50%;
+    color: #fff;
+    padding: 0 3px 0 3px;
+    margin-left: 2vw;
+  }
+
+  .tile-container-rides {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -253,16 +263,6 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     }
     &:hover span > i {
       -webkit-text-stroke: 1px rgba(38, 185, 255, 1);
-    }
-
-    span {
-      height: 2rem;
-      width: 2rem;
-      border: 1px solid rgba(0, 0, 0, .25);
-      border-radius: 50%;
-      color: #fff;
-      padding: 0 3px 0 3px;
-      margin-left: 2vw;
     }
 
     .tile {
@@ -400,33 +400,11 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   }
 
   @for $i from 1 through length($card-borders) {
-    .tile-container:nth-child(#{length($card-borders)}n+#{$i}) > .tile {
+    .tile-container-rides:nth-child(#{length($card-borders)}n+#{$i}) > .tile {
         border-left: 5px solid nth($card-borders, $i);
     }
-    .tile-container:nth-child(#{length($card-borders)}n+#{$i}) > .tile > .tile-title > .time {
+    .tile-container-rides:nth-child(#{length($card-borders)}n+#{$i}) > .tile > .tile-title > .time {
         background-color: nth($card-borders, $i);
     }
-  }
-}
-
-.add-vehicle {
-  position: absolute;
-  box-sizing: border-box;
-  top: 88vh;
-  left: 90vw;
-  height: 7rem;
-  width: 7rem;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, .5);
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.16);
-  font-size: 5rem;
-  font-weight: lighter;
-  text-align: center;
-  line-height: 5rem;
-
-  a {
-    outline: none;
-    text-decoration: none;
-    color: #fff;
   }
 }

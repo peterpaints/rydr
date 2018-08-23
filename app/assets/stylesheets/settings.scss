@@ -1,6 +1,6 @@
 $text-color: rgba(153, 123, 73, 1);
-$badge-color: #4c3f54;
-$card-borders: #c6ad79, #f6c0ef, #f5a390;
+$badge-color: rgba(228, 83, 94, .85);
+$card-borders: #ff8000, #8d230f, #665600;
 
 .profile {
   display: flex;
@@ -10,7 +10,6 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
 }
 
 .left-nav {
-  // background-color: rgba(245, 245, 245, .3);
   background-color: rgba(241, 246, 248, 1);
   display: flex;
   flex-direction: column;
@@ -59,6 +58,9 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     background-color: rgba(255, 255, 255, .8);
     color: $badge-color;
     outline: none;
+    a {
+      color: $badge-color;
+    }
   }
 
   i {
@@ -161,11 +163,11 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     .dropdown-content {
       display: none;
       position: absolute;
-      right: 1vw;
+      right: .5vw;
       background-color: #f9f9f9;
       min-width: 7vw;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
+      z-index: 9999;
 
       a {
         float: none;
@@ -195,15 +197,56 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   align-items: center;
   justify-content: space-between;
   height: 7.5vh;
-  width: 75vw;
+  width: 78vw;
   position: relative;
   top: 3.5vh;
   left: 5vw;
 
-  .profile-setting {
-    font-family: 'Cantarell', sans-serif;
-    font-size: 1vw;
-    color: $badge-color;
+  .tabs {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 33vw;
+    margin-top: 1vh;
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      margin: 0 0 -1px;
+      padding: 15px 15px;
+      text-align: center;
+      font-family: 'Cantarell', sans-serif;
+      font-weight: 300;
+      color: $text-color;
+      font-size: .9vw;
+      border: 1px solid transparent;
+    }
+
+    label:before {
+      font-family: fontawesome;
+      font-weight: normal;
+      margin-right: 10px;
+    }
+
+    label[for*='1']:before { content: '\f1b9'; }
+    label[for*='2']:before { content: '\f0f3'; }
+    label[for*='3']:before { content: '\f1da'; }
+
+    label:hover {
+      color: $badge-color;
+      cursor: pointer;
+    }
+
+    input[type="radio"]:checked + label {
+      border: 1px solid #ddd;
+      border-top: 2px solid orange;
+      border-bottom: 1px solid #fff;
+    }
   }
 
   .filter-button {
@@ -224,9 +267,10 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   }
 }
 
-.tiles {
+.tiles-settings {
   // display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-content: flex-start;
   justify-content: space-between;
   height: 75vh;
@@ -236,7 +280,17 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   left: 5vw;
   overflow: scroll;
 
-  .tile-container {
+  span {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid rgba(0, 0, 0, .25);
+    border-radius: 50%;
+    color: #fff;
+    padding: 0 3px 0 3px;
+    margin-left: 2vw;
+  }
+
+  .tile-container-settings {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -257,14 +311,12 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
       -webkit-text-stroke: 1px rgba(38, 185, 255, 1);
     }
 
-    span {
-      height: 2rem;
-      width: 2rem;
-      border: 1px solid rgba(0, 0, 0, .25);
-      border-radius: 50%;
-      color: #fff;
-      padding: 0 3px 0 3px;
-      margin-left: 2vw;
+    input {
+      &:active, &:focus {
+        color: rgba(0, 0, 0, 1);
+        outline: none;
+        text-decoration: none;
+      }
     }
 
     .tile {
@@ -281,10 +333,14 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
       font-family: 'Gloria Hallelujah', sans-serif;
     }
 
+    .input-disabled, .save {
+      border: 0;
+    }
+
     .tile-title {
       display: flex;
       flex-direction: row;
-      width: 64vw;
+      width: 100%;
       align-items: flex-start;
       justify-content: space-between;
 
@@ -299,6 +355,10 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
 
         .make-model {
           margin-left: 1vw;
+
+          input {
+            width: 3.7vw;
+          }
         }
       }
 
@@ -317,7 +377,7 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
     .tile-content {
       display: flex;
       flex-direction: row;
-      width: 64vw;
+      width: auto;
       align-items: flex-start;
 
       .license {
@@ -331,6 +391,10 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
 
         .plate {
           margin-left: 1vw;
+
+          input {
+            width: 5vw;
+          }
         }
       }
 
@@ -342,6 +406,13 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
         align-items: center;
         justify-content: space-between;
         margin-left: 5vw;
+
+        .seating {
+          margin-left: .6vw;
+          input {
+            width: 5vw;
+          }
+        }
       }
 
       .color {
@@ -352,6 +423,12 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
         align-items: center;
         justify-content: space-between;
         margin-left: 5vw;
+
+        .hue {
+          input {
+            width: 5vw;
+          }
+        }
       }
     }
 
@@ -370,8 +447,7 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
         align-items: center;
         justify-content: space-between;
         width: 4vw;
-        cursor: pointer;
-        &:first-child {
+        &:first-child, .save {
           width: 3.2vw;
         }
 
@@ -379,26 +455,40 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
           color: rgba(0, 0, 0, .5);
         }
 
-        .update-text {
+        .edit, .save, .delete {
           color: rgba(0, 0, 0, .5);
+          cursor: pointer;
+          &:hover, &:active, &:focus {
+            color: rgba(0, 0, 0, 1);
+            outline: none;
+            text-decoration: none;
+          }
+
+          a {
+            color: rgba(0, 0, 0, .5);
+            outline: none;
+            text-decoration: none;
+            &:hover {
+              color: rgba(0, 0, 0, 1);
+            }
+          }
         }
       }
     }
   }
 
   @for $i from 1 through length($card-borders) {
-    .tile-container:nth-child(#{length($card-borders)}n+#{$i}) > .tile {
+    .tile-container-settings:nth-child(#{length($card-borders)}n+#{$i}) > .tile {
         border-left: 5px solid nth($card-borders, $i);
     }
-    .tile-container:nth-child(#{length($card-borders)}n+#{$i}) > .tile > .tile-title > .rides-history {
+    .tile-container-settings:nth-child(#{length($card-borders)}n+#{$i}) > .tile > .tile-title > .rides-history {
         background-color: nth($card-borders, $i);
     }
   }
 }
 
-.add-vehicle {
+.add-vehicle, .add-ride {
   position: absolute;
-  box-sizing: border-box;
   top: 88vh;
   left: 90vw;
   height: 7rem;
@@ -410,6 +500,10 @@ $card-borders: #c6ad79, #f6c0ef, #f5a390;
   font-weight: lighter;
   text-align: center;
   line-height: 5rem;
+  padding: 0 0 7px 0;
+  &:hover {
+    background-color: rgba(0, 0, 0, .6);
+  }
 
   a {
     outline: none;

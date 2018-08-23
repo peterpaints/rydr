@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    restricted_access unless @user.id == logged_in?
+    restricted_access unless @user.id == current_user
   end
 
   private

@@ -3,25 +3,16 @@
 class RidesController < ApplicationController
   before_action :require_login
 
-  def new
-    @ride = Ride.new
+  def index
+    @user = User.find(current_user)
   end
 
   def create
     @ride = Ride.new(ride_params)
-    if @ride.save
-      redirect_to rides_path
-    else
-      flash[:danger] = @ride.errors.full_messages.to_sentence
-      redirect_to login_path
-    end
+    flash[:danger] = @ride.errors.full_messages.to_sentence unless @ride.save
   end
 
   def edit
-  end
-
-  def show
-    @user = User.find(logged_in?)
   end
 
   private
