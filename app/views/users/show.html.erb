@@ -9,7 +9,7 @@
     <div class="nav-title"><i class="fa fa-cogs"></i><span> Settings</span></div>
     <div class="line-break"></div>
     <button class="left-nav-link rides-nav">
-      <i class="fa fa-car"></i><span><%= link_to "RIDES", rides_path %></span>
+      <i class="fa fa-car"></i><span><%= link_to "AVAILABLE RIDES", rides_path %></span>
     </button>
     <button class="left-nav-link settings-nav">
       <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
@@ -43,7 +43,7 @@
           <input id="tab2" type="radio" name="tabs">
           <label class="notifications-nav" for="tab2">CONTACT INFO</label>
           <input id="tab3" type="radio" name="tabs">
-          <label class="ride-history-nav" for="tab3">YOUR RIDES</label>
+          <label class="ride-history-nav" for="tab3">OFFER A RIDE</label>
         </div>
         <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button>
       </div>
@@ -62,5 +62,11 @@
   </div>
   <div>
     <%= render partial: "rides/partials/ride_form" %>
+  </div>
+  <div>
+    <%= render partial: "rides/partials/confirm_delete" %>
+  </div>
+  <div>
+    <%= render partial: "vehicles/partials/confirm_delete" %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "rides" %>
-<%= javascript_include_tag 'rides' %>
+<%= javascript_include_tag "rides" %>
 <div class="profile">
   <nav class="left-nav">
     <div class="logo">
@@ -9,7 +9,7 @@
     <div class="nav-title"><p>Available Rides</p></div>
     <div class="line-break"></div>
     <button class="left-nav-link vehicles-nav">
-      <i class="fa fa-car"></i><span>RIDES</span>
+      <i class="fa fa-car"></i><span>AVAILABLE RIDES</span>
     </button>
     <button class="left-nav-link profile-nav">
       <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
@@ -39,7 +39,7 @@
       <div class="filters">
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
-      <div class="tiles-rides">
+      <div class="tiles-rides all-rides">
         <%= render partial: "rides/partials/ride" %>
         <%= render partial: "rides/partials/ride" %>
         <%= render partial: "rides/partials/ride" %>

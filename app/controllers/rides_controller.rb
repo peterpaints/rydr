@@ -22,7 +22,7 @@ class RidesController < ApplicationController
     redirect_to rides_path
   end
 
-  def user_params
+  def ride_params
     params.require(:ride).permit(:destination, :origin, :capacity,
                                  :departure_time, :vehicle_id)
   end

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.notifications-tile').hide();
     $('.user-rides').hide();
     $('.add-ride').hide();
+    $('.filter-button').show();
   });
 
   $('.notifications-nav').click(() => {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.add-vehicle').hide();
     $('.user-rides').hide();
     $('.add-ride').hide();
+    $('.filter-button').hide();
   });
 
   $('.ride-history-nav').click(() => {
@@ -27,5 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.vehicle-tile').hide();
     $('.add-vehicle').hide();
     $('.notifications-tile').hide();
+    $('.filter-button').show();
   });
 });

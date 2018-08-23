@@ -1,6 +1,7 @@
+<%= javascript_include_tag "vehicle" %>
 <div class="tile-container-settings vehicle-tile">
   <span><i class="fa fa-check"></i></span>
-  <%= form_for :vehicle, url: vehicle_path, html: {class: "tile"}, method: :patch do |f| %>
+  <%= form_for :vehicle, url: vehicle_path(1), html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="vehicle">
         <%= image_tag "vehicle.svg" %>
@@ -50,7 +51,7 @@
       </div>
       <div class="update-btn">
         <i class="fa fa-trash"></i>
-        <div class="delete"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></div>
+        <div class="delete"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-vehicle-modal"} %></div>
       </div>
     </div>
   <% end %>

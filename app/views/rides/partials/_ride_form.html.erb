@@ -14,7 +14,9 @@
       pattern: '^[0-9]$',
       title: "Capacity must be a number, e.g. 5",
       placeholder: "Capacity e.g. 5" %>
-      <%= f.text_field :vehicle_id, required: true, placeholder: "Which vehicle will you use?" %>
+      <%= f.select :vehicle_id, ['KCR 232C', 'KCF 123F'], {include_blank: "Select a Car"}, 
+        {required: true, title: "We drive cars here, not promises"}
+      %>
       <div class="submit-button">
         <%= f.submit "Add", class: "submit" %>
       </div>
