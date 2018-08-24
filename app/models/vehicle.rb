@@ -5,7 +5,7 @@ class Vehicle < ApplicationRecord
   belongs_to :user
 
   VALID_PLATE = /[A-Z]{3} [0-9]{3}[A-Z]{1}/
-  VALID_CAPACITY = /[0-9]/
+  VALID_CAPACITY = /[1-9]/
 
   validates :make, :model, :license_plate, :capacity, :color,
             presence: { message: 'Please enter every attribute.' }

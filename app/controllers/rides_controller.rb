@@ -2,10 +2,13 @@
 
 class RidesController < ApplicationController
   before_action :require_login
-  before_action :find_ride, only: [:update, :destroy]
+  before_action :find_ride, only: [:book, :cancel, :update, :destroy]
+  before_action :find_current_user, only: [:index, :book, :cancel]
+
+  rescue_from Exceptions::InvalidBooking, with: :ride_booking_error
 
   def index
-    @user = User.find(current_user)
+    @rides = Ride.all
   end
 
   def create
@@ -25,9 +28,21 @@ class RidesController < ApplicationController
     end
   end
 
+  def book
+    @ride.users << @user
+    flash[:success] = 'Ride booked!'
+    redirect_to rides_path
+  end
+
+  def cancel
+    @ride.users.delete(@user)
+    flash[:success] = 'Ride cancelled. What\'s up?'
+    redirect_to rides_path
+  end
+
   def destroy
     if @ride.destroy
-      ride_save_success('Oh no! Now we have to walk?')
+      ride_save_success('Ride deleted. Now we have to walk?')
     else
       ride_save_error(@ride)
     end
@@ -39,9 +54,18 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
   end
 
-  def ride_save_success(message=nil)
+  def find_current_user
+    @user = User.find(current_user)
+  end
+
+  def ride_save_success(message = nil)
     flash[:success] = message || 'Ride saved!'
     redirect_to user_path(current_user)
+  end
+
+  def ride_booking_error
+    flash[:danger] = 'You can not book a ride you own.'
+    redirect_to rides_path
   end
 
   def ride_save_error(ride)

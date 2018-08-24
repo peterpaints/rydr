@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag "rides" %>
-<%= javascript_include_tag "rides" %>
 <div class="profile">
   <nav class="left-nav">
     <div class="logo">
@@ -12,7 +11,7 @@
       <i class="fa fa-car"></i><span>AVAILABLE RIDES</span>
     </button>
     <button class="left-nav-link profile-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
+      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(current_user) %></span>
     </button>
     <div class="line-break"></div>
   </nav>
@@ -40,12 +39,9 @@
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
       <div class="tiles-rides all-rides">
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/notifications" %>
+        <% @rides.each do |ride| %>
+          <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+        <% end %>
       </div>
     </div>
   </div>

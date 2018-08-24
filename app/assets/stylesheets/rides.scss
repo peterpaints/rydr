@@ -348,7 +348,7 @@ $card-borders: #ff8000, #8d230f, #665600;
       display: flex;
       flex-direction: row;
       width: 64vw;
-      align-items: flex-start;
+      align-items: center;
 
       .ride-vehicle {
         display: flex;
@@ -376,6 +376,11 @@ $card-borders: #ff8000, #8d230f, #665600;
           width: 2vw !important;
         }
 
+        label {
+          margin-bottom: 0;
+          margin-left: -3px;
+        }
+
         .seats-left {
           margin-left: 1vw;
         }
@@ -396,14 +401,41 @@ $card-borders: #ff8000, #8d230f, #665600;
       }
     }
 
+    .ride-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 64vw;
+
+      .booked-btn {
+        font-size: .6vw;
+        color: rgba(0, 0, 0, .7);
+        margin-left: 1.2vw;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .booked {
+          margin-left: .5vw;
+        }
+      }
+    }
+
     .tile-update {
       display: flex;
       flex-direction: row;
       align-self: flex-end;
       justify-content: space-between;
       width: 9vw;
-      margin-right: 3vw;
+      margin-right: 1.5vw;
       font-size: .9vw;
+
+      .book-btn, .cancel-btn {
+        margin-left: auto;
+        margin-right: 1vw;
+      }
 
       .update-btn {
         display: flex;

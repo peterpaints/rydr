@@ -8,6 +8,7 @@ $(() => {
   $('input[type=datetime-local]').addClass('disabled-time-picker');
   $('.tile-container-rides .save').parent().hide();
   $('.tile-container-rides').on('click', '.edit', (e) => {
+    console.log($(e.delegateTarget).find('input[type=text]'));
     $(e.delegateTarget).find('input[type=text], input[type=datetime-local], select')
     .attr('disabled', (_, attr) => { return !attr })
     .toggleClass('input-disabled');

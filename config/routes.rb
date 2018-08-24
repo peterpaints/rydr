@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
+  get '/rides/:id/book', to: 'rides#book', as: 'book_ride'
+  get '/rides/:id/cancel', to: 'rides#cancel', as: 'cancel_ride'
+
   resources :vehicles
   resources :rides
 end
