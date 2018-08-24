@@ -2,6 +2,7 @@
 
 class VehiclesController < ApplicationController
   before_action :require_login
+  before_action :find_vehicle, only: [:update, :destroy]
 
   def new
     @vehicle = Vehicle.new
@@ -12,19 +13,42 @@ class VehiclesController < ApplicationController
     if @vehicle.save
       vehicle_save_success
     else
-      flash[:danger] = @vehicle.errors.full_messages.to_sentence
-      redirect_to profile_path
+      vehicle_save_error(@vehicle)
     end
   end
 
-  def edit
+  def update
+    if @vehicle.update(vehicle_params)
+      vehicle_save_success
+    else
+      vehicle_save_error(@vehicle)
+    end
+  end
+
+  def destroy
+    if @vehicle.destroy
+      vehicle_save_success('Shame. It was a nice car.')
+    else
+      vehicle_save_error(@vehicle)
+    end
   end
 
   private
 
-  def vehicle_save_success
-    flash[:success] = 'Changes saved!'
-    redirect_to profile_path
+  def find_vehicle
+    @vehicle = Vehicle.find(params[:id])
+  end
+
+  def vehicle_save_success(message=nil)
+    flash[:success] = message || 'Vehicle saved!'
+    redirect_to user_path(current_user)
+  end
+
+  def vehicle_save_error(vehicle)
+    vehicle.errors.each do |attr, message|
+      flash[:danger] = message
+    end
+    redirect_to user_path(current_user)
   end
 
   def vehicle_params

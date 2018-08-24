@@ -31,4 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.notifications-tile').hide();
     $('.filter-button').show();
   });
+
+  $('.tile-container-settings').on('click', '.delete', (e) => {
+    $('#delete-vehicle-modal form').attr('action', $(e.target).attr('data-href'));
+  });
 });

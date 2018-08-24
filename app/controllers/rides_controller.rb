@@ -9,7 +9,11 @@ class RidesController < ApplicationController
 
   def create
     @ride = Ride.new(ride_params)
-    flash[:danger] = @ride.errors.full_messages.to_sentence unless @ride.save
+    if @ride.save
+      ride_save_success
+    else
+      ride_save_error(@ride)
+    end
   end
 
   def edit
@@ -20,6 +24,18 @@ class RidesController < ApplicationController
   def restricted_access
     flash[:danger] = "You can't view that page"
     redirect_to rides_path
+  end
+
+  def ride_save_success
+    flash[:success] = 'Ride created!'
+    redirect_to user_path(current_user)
+  end
+
+  def ride_save_error(ride)
+    ride.errors.each do |attr, message|
+      flash[:danger] = message
+    end
+    redirect_to user_path(current_user)
   end
 
   def ride_params

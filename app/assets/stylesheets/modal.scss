@@ -65,8 +65,11 @@
         color: #95989a;
       }
 
-      &:focus {
+      &:focus, &:active {
         outline: none;
+        border: 1px solid #000;
+        background-color: none;
+        color: #000 !important;
       }
     }
 

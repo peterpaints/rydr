@@ -9,6 +9,18 @@
   background-image: url(street.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+
+  input {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      color: white;
+      border: none;
+      -webkit-text-fill-color: white;
+      transition: background-color 5000s ease-in-out 0s;
+      outline: none;
+    }
+  }
 }
 
 .form-container {
@@ -146,18 +158,6 @@
     font-size: 2rem;
     color: white;
     top: 1.63rem;
-  }
-}
-
-input {
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus {
-    color: white;
-    border: none;
-    -webkit-text-fill-color: white;
-    transition: background-color 5000s ease-in-out 0s;
-    outline: none;
   }
 }
 

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
 
   def new
-    redirect_to rides_path if logged_in?
+    redirect_to rides_path if current_user
   end
 
   def create

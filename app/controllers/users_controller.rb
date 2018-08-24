@@ -12,8 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      flash[:danger] = @user.errors.full_messages.to_sentence
-      redirect_to login_path
+      user_save_error(@user)
     end
   end
 
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    restricted_access unless @user.id == current_user
+    restrict_access unless @user.id == current_user
   end
 
   private
@@ -32,7 +31,14 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
 
-  def restricted_access
+  def user_save_error(user)
+    user.errors.each do |attr, message|
+      flash[:danger] = message
+    end
+    redirect_to login_path
+  end
+
+  def restrict_access
     flash[:danger] = "You can't view that page"
     redirect_to rides_path
   end

@@ -48,8 +48,9 @@
         <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button>
       </div>
       <div class="tiles-settings">
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_vehicle" %>
+        <% @user.vehicles.each do |vehicle| %>
+          <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+        <% end %>
         <%= render partial: "users/partials/user_notifications" %>
         <%= render partial: "users/partials/user_rides" %>
       </div>

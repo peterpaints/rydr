@@ -1,16 +1,16 @@
 <%= javascript_include_tag "vehicle" %>
 <div class="tile-container-settings vehicle-tile">
   <span><i class="fa fa-check"></i></span>
-  <%= form_for :vehicle, url: vehicle_path(1), html: {class: "tile"}, method: :patch do |f| %>
+  <%= form_for :vehicle, url: vehicle_path(vehicle.id), html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="vehicle">
         <%= image_tag "vehicle.svg" %>
         <div class="make-model">
-          <%= f.text_field :make, required: true, value: "Toyota" %>
-          <%= f.text_field :model, required: true, value: "Corolla" %>
+          <%= f.text_field :make, required: true, value: vehicle.make %>
+          <%= f.text_field :model, required: true, value: vehicle.model %>
         </div>
       </div>
-      <div class="rides-history">Rides Completed: 5</div>
+      <div class="rides-history">Rides Completed: <%= vehicle.rides.count %></div>
     </div>
     <div class="tile-content">
       <div class="license">
@@ -18,7 +18,7 @@
         <div class="plate">
           <%= f.text_field :license_plate, required: true,
           pattern: '^[A-Z]{3} [0-9]{3}[A-Z]{1}$',
-          value: "KCR 232C",
+          value: vehicle.license_plate,
           title: "License Plate must be in this format: KCR 232C"
           %>
         </div>
@@ -28,7 +28,7 @@
         <div class="seating">
           <%= f.text_field :capacity, required: true,
           pattern: '^[0-9]$',
-          value: "5",
+          value: vehicle.capacity,
           title: "Capacity must be a number, e.g. 5"
           %>
         </div>
@@ -36,7 +36,7 @@
       <div class="color">
         <%= image_tag "palette.svg" %>
         <div class="hue">
-          <%= f.text_field :color, required: true, value: "White" %>
+          <%= f.text_field :color, required: true, value: vehicle.color %>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
       </div>
       <div class="update-btn">
         <i class="fa fa-trash"></i>
-        <div class="delete"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-vehicle-modal"} %></div>
+        <div class="delete"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-vehicle-modal", href: vehicle_path(vehicle.id)} %></div>
       </div>
     </div>
   <% end %>
