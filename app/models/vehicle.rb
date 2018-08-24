@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Vehicle < ApplicationRecord
-  has_many :rides
+  has_many :rides, dependent: :destroy
   belongs_to :user
 
   VALID_PLATE = /[A-Z]{3} [0-9]{3}[A-Z]{1}/

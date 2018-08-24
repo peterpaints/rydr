@@ -9,12 +9,15 @@ $(() => {
   $('.tile-container-rides .save').parent().hide();
   $('.tile-container-rides').on('click', '.edit', (e) => {
     $(e.delegateTarget).find('input[type=text], input[type=datetime-local], select')
-    .attr('disabled', (_, attr) => { return !attr})
+    .attr('disabled', (_, attr) => { return !attr })
     .toggleClass('input-disabled');
     $(e.delegateTarget).find('select').toggleClass('disabled-select');
     $(e.delegateTarget).find('input[type=datetime-local]')
     .toggleClass('disabled-time-picker');
     $(e.delegateTarget).find('.save').parent().show();
     $(e.delegateTarget).find('.edit').parent().hide();
+  });
+  $('.tile-container-rides').on('click', '.delete-ride', (e) => {
+    $('#delete-ride-modal form').attr('action', $(e.target).attr('data-href'));
   });
 });

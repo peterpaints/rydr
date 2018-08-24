@@ -290,8 +290,8 @@ $card-borders: #ff8000, #8d230f, #665600;
     }
 
     .disabled-time-picker {
-      padding-left: 15.25px !important;
-      width: 9vw !important;
+      padding-left: 20px !important;
+      width: 9.5vw !important;
       &::-webkit-inner-spin-button,
       &::-webkit-calendar-picker-indicator {
         display: none;
@@ -321,6 +321,9 @@ $card-borders: #ff8000, #8d230f, #665600;
           flex-direction: row;
           width: auto;
           justify-content: space-between;
+          &:last-child {
+            margin-left: 3vw;
+          }
 
           input {
             margin-left: 1vw;
@@ -369,6 +372,9 @@ $card-borders: #ff8000, #8d230f, #665600;
         align-items: center;
         justify-content: space-between;
         margin-left: 5vw;
+        input {
+          width: 2vw !important;
+        }
 
         .seats-left {
           margin-left: 1vw;

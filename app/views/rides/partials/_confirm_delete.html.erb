@@ -6,7 +6,7 @@
       <p class="modal-heading">Are you sure?</p>
       <div class="modal-underline" />
     </div>
-    <%= form_for :ride, url: ride_path(1), method: :delete do |f| %>
+    <%= form_for :ride, method: :delete do |f| %>
       <div class="submit-button">
         <%= f.submit "Delete", class: "submit" %>
       </div>

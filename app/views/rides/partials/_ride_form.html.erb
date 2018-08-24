@@ -14,8 +14,9 @@
       pattern: '^[0-9]$',
       title: "Capacity must be a number, e.g. 5",
       placeholder: "Capacity e.g. 5" %>
-      <%= f.select :vehicle_id, ['KCR 232C', 'KCF 123F'], {include_blank: "Select a Car"}, 
-        {required: true, title: "We drive cars here, not promises"}
+      <%= f.collection_select :vehicle_id, @user.vehicles, :id, :license_plate,
+        {prompt: "Select a Car"},
+        {required: true} 
       %>
       <div class="submit-button">
         <%= f.submit "Add", class: "submit" %>

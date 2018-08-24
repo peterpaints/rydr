@@ -2,6 +2,7 @@
 
 class RidesController < ApplicationController
   before_action :require_login
+  before_action :find_ride, only: [:update, :destroy]
 
   def index
     @user = User.find(current_user)
@@ -16,23 +17,35 @@ class RidesController < ApplicationController
     end
   end
 
-  def edit
+  def update
+    if @ride.update(ride_params)
+      ride_save_success
+    else
+      ride_save_error(@ride)
+    end
+  end
+
+  def destroy
+    if @ride.destroy
+      ride_save_success('Oh no! Now we have to walk?')
+    else
+      ride_save_error(@ride)
+    end
   end
 
   private
 
-  def restricted_access
-    flash[:danger] = "You can't view that page"
-    redirect_to rides_path
+  def find_ride
+    @ride = Ride.find(params[:id])
   end
 
-  def ride_save_success
-    flash[:success] = 'Ride created!'
+  def ride_save_success(message=nil)
+    flash[:success] = message || 'Ride saved!'
     redirect_to user_path(current_user)
   end
 
   def ride_save_error(ride)
-    ride.errors.each do |attr, message|
+    ride.errors.each do |_attr, message|
       flash[:danger] = message
     end
     redirect_to user_path(current_user)

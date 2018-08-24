@@ -1,38 +1,43 @@
 <%= stylesheet_link_tag "rides" %>
 <div class="tile-container-rides">
   <span><i class="fa fa-check"></i></span>
-  <%= form_for :ride, url: ride_path(1), html: {class: "tile"}, method: :patch do |f| %>
+  <%= form_for :ride, url: ride_path(ride.id), html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="route">
         <div class="from-to">
           <%= image_tag "from.svg", title: "origin" %>
-          <%= f.text_field :origin, required: true, value: "Andela Kenya" %>
+          <%= f.text_field :origin, required: true, value: ride.origin %>
         </div>
         <div>to</div>
         <div class="from-to">
           <%= image_tag "to.svg", title: "destination" %>
-          <%= f.text_field :destination, required: true, value: "Westlands" %>
+          <%= f.text_field :destination, required: true, value: ride.destination %>
         </div>
       </div>
-      <%= f.datetime_local_field :departure_time, class: "time", required: true, value: "2018-08-13T17:30" %>
+      <%= f.datetime_local_field :departure_time, class: "time", required: true, 
+        value: ride.departure_time.strftime("%Y-%m-%dT%H:%M") 
+      %>
     </div>
     <div class="tile-content">
       <div class="ride-vehicle">
         <%= image_tag "vehicle.svg" %>
-        <%= f.select :vehicle_id, ['KCR 232C', 'KCF 123F'], {}, {class: "license-plate"} %>
+        <%= f.collection_select :vehicle_id, user.vehicles, :id, :license_plate,
+          {selected: ride.vehicle.id},
+          {class: "license-plate"} 
+        %>
       </div>
       <div class="seating-capacity">
         <%= image_tag "capacity.svg" %>
         <%= f.text_field :capacity, required: true,
         class: "seats-left",
         pattern: '^[0-9]$',
-        value: "5",
+        value: ride.capacity,
         title: "Capacity must be a number, e.g. 5"
         %>
       </div>
       <div class="ride-color">
         <%= image_tag "palette.svg" %>
-        <div class="ride-details">White - Toyota Corolla</div>
+        <div class="ride-details"><%=ride.vehicle.color%> <%=ride.vehicle.make%> <%=ride.vehicle.model%></div>
       </div>
     </div>
     <div class="tile-update">
@@ -50,7 +55,7 @@
       </div>
       <div class="delete-btn update-btn">
         <i class="fa fa-trash"></i>
-        <div class="delete-ride"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-ride-modal"} %></div>
+        <div class="delete-ride"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-ride-modal", href: ride_path(ride.id)} %></div>
       </div>
       <div class="cancel-btn update-btn">
         <i class="fa fa-ban"></i>
