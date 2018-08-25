@@ -8,22 +8,26 @@ class User < ApplicationRecord
 
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
   VALID_PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-  VALID_PHONE_NUMBER = /07[0-9]{8}/
+  VALID_PHONE_NUMBER = /\A07[0-9]{8}\z/
   VALID_SLACK_HANDLE = /[@][a-z0-9][a-z0-9._-]*/
 
   validates :email,
-            presence: { message: 'Invalid email or password.' },
+            presence: true,
             uniqueness: { message: 'User already exists.' \
             ' Please Log In.' },
-            format: { with: VALID_EMAIL, message: 'Invalid email or password.' }
+            format: { with: VALID_EMAIL }
 
   validates :password,
-            presence: { message: 'Invalid email or password.' },
+            presence: true,
             allow_nil: true,
-            confirmation: { message: 'Please confirm password' },
-            format: { with: VALID_PASSWORD, message: 'Invalid email or password.' }
+            confirmation: true,
+            format: { with: VALID_PASSWORD }
+
   validates :phone_number,
-            format: { with: VALID_PHONE_NUMBER, message: 'Invalid phone number.' }
+            format: { with: VALID_PHONE_NUMBER },
+            allow_nil: true
+
   validates :slack_handle,
-            format: { with: VALID_SLACK_HANDLE, message: 'Invalid slack handle.' }
+            format: { with: VALID_SLACK_HANDLE },
+            allow_nil: true
 end

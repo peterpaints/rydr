@@ -9,13 +9,14 @@ class Ride < ApplicationRecord
   VALID_CAPACITY = /[1-9]/
 
   validates :origin, :destination, :departure_time, :capacity, :vehicle_id,
-            presence: { message: 'Please enter every attribute.' }
+            presence: true
+
   validates :vehicle_id,
-            uniqueness: { scope: :departure_time, message: 'That ride already exists.' }
+            uniqueness: { scope: :departure_time,
+                          message: 'That ride already exists.' }
+
   validates :capacity,
-            format: { with: VALID_CAPACITY, message: 'Invalid capacity format.' }
-  validates :users,
-            length: { maximum: :capacity, message: 'Sorry, ride\'s full.' }
+            format: { with: VALID_CAPACITY }
 
   def booked?(user)
     users.include? user
@@ -23,5 +24,6 @@ class Ride < ApplicationRecord
 
   def ride_owner_cannot_book(user)
     raise InvalidBooking if user.vehicles.include? vehicle
+    raise RideFull if users.size == capacity
   end
 end

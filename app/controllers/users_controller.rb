@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :require_login, only: [:edit, :show]
-  before_action :set_user, only: [:show, :update]
+  before_action :require_login, only: %i[edit show]
+  before_action :set_user, only: %i[show update]
 
   def new
     @user = User.new

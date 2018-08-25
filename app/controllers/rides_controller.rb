@@ -2,13 +2,14 @@
 
 class RidesController < ApplicationController
   before_action :require_login
-  before_action :find_ride, only: [:book, :cancel, :update, :destroy]
-  before_action :find_current_user, only: [:index, :book, :cancel]
+  before_action :find_ride, only: %i[book cancel update destroy]
+  before_action :find_current_user, only: %i[index book cancel]
 
   rescue_from Exceptions::InvalidBooking, with: :ride_booking_error
+  rescue_from Exceptions::RideFull, with: :ride_full_error
 
   def index
-    @rides = Ride.all
+    @rides = Ride.where('departure_time > ?', Time.now)
   end
 
   def create
@@ -65,6 +66,11 @@ class RidesController < ApplicationController
 
   def ride_booking_error
     flash[:danger] = 'You can not book a ride you own.'
+    redirect_to rides_path
+  end
+
+  def ride_full_error
+    flash[:danger] = 'Sorry, ride\'s full.'
     redirect_to rides_path
   end
 
