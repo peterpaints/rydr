@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/peterpaints/rydr/tree/ft-tests-auth-controllers-models-159684840.svg?style=svg)](https://circleci.com/gh/peterpaints/rydr/tree/ft-tests-auth-controllers-models-159684840)
+[![Coverage Status](https://coveralls.io/repos/github/peterpaints/rydr/badge.svg?branch=ft-tests-auth-controllers-models-159684840)](https://coveralls.io/github/peterpaints/rydr?branch=ft-tests-auth-controllers-models-159684840)
 #### Rydr
 
 ### Intro
