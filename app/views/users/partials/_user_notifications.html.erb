@@ -1,50 +1,58 @@
 <%= stylesheet_link_tag "notifications" %>
 <div class="tile-container notifications-tile">
   <span><i class="fa fa-check"></i></span>
-  <div class="tile">
+  <%= form_for :user, url: user_path(user.id), html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="contact">
         <%= image_tag "contact.svg" %>
         <div class="contact-heading">CONTACT DETAILS</div>
       </div>
     </div>
-    <div class="tile-content">
+    <div class="tile-content phone-number">
       <div class="phone">
         <%= image_tag "phone.svg" %>
-        <div class="phone-number">0724714151</div>
+        <%= f.text_field :phone_number,
+          pattern: '^07[0-9]{8}$',
+          value: user.phone_number,
+          title: "Please enter a valid Kenyan phone number"
+        %>
       </div>
       <div class="update-buttons">
         <div class="update-btn">
           <i class="fa fa-pencil"></i>
-          <div class="update-text">Edit</div>
+          <div class="edit">Edit</div>
         </div>
         <div class="update-btn">
-          <i class="fa fa-trash"></i>
-          <div class="update-text">Delete</div>
+          <i class="fa fa-save"></i>
+          <%= f.submit "Save", class: "save" %>
         </div>
       </div>
     </div>
-    <div class="tile-footer">
+    <div class="tile-footer slack-handle">
       <div class="slack">
         <%= image_tag "slack.svg" %>
-        <div class="slack-handle">@ptr</div>
+        <%= f.text_field :slack_handle,
+          pattern: '^[@][a-z0-9][a-z0-9._-]*$',
+          value: user.slack_handle,
+          title: "Please start your slack handle with @"
+        %>
       </div>
       <div class="update-buttons">
         <div class="update-btn">
           <i class="fa fa-pencil"></i>
-          <div class="update-text">Edit</div>
+          <div class="edit">Edit</div>
         </div>
         <div class="update-btn">
-          <i class="fa fa-trash"></i>
-          <div class="update-text">Delete</div>
+          <i class="fa fa-save"></i>
+          <%= f.submit "Save", class: "save" %>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 <div class="tile-container notifications-tile">
   <span><i class="fa fa-check"></i></span>
-  <div class="tile">
+  <%= form_for :user, url: user_path(user.id), html: {class: "tile"}, method: :patch do |f| %>
     <div class="tile-title">
       <div class="contact">
         <%= image_tag "settings.svg" %>
@@ -55,7 +63,7 @@
       <div class="phone">
         <%= image_tag "phone.svg" %>
         <label class="switch">
-          <input type="checkbox">
+          <%= f.check_box :phone_on, checked: user.phone_on, onchange: 'this.form.submit();' %>
           <div class="slider round"></div>
         </label>
       </div>
@@ -64,10 +72,10 @@
       <div class="slack">
         <%= image_tag "slack.svg" %>
         <label class="switch">
-          <input type="checkbox">
+          <%= f.check_box :slack_on, checked: user.slack_on, onchange: 'this.form.submit();' %>
           <div class="slider round"></div>
         </label>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
