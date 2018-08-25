@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :require_login, only: [:edit, :show]
+  before_action :set_user, only: [:show, :update]
+
   def new
     @user = User.new
   end
@@ -10,33 +13,48 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      p @user.errors.full_messages.to_sentence
-      flash[:danger] = @user.errors.full_messages.to_sentence
-      redirect_to login_path
+      user_save_error(@user, login_path)
     end
   end
 
-  def edit
+  def show
+    restrict_access unless @user.id == current_user
   end
 
-  def show
-    @user = User.find(params[:id])
-    restricted_access unless @user.id == logged_in?
+  def update
+    if @user.update(user_params)
+      flash[:success] = 'Settings updated!'
+      redirect_to user_path(current_user)
+    else
+      user_save_error(@user, user_path(current_user))
+    end
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_save_success
     session[:user] = @user.id
     redirect_to user_path(@user.id)
   end
 
-  def restricted_access
+  def user_save_error(user, path)
+    user.errors.each do |_attr, message|
+      flash[:danger] = message
+    end
+    redirect_to path
+  end
+
+  def restrict_access
     flash[:danger] = "You can't view that page"
     redirect_to rides_path
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :confirm)
+    params.require(:user).permit(:email, :password, :confirm, :phone_number,
+                                 :slack_handle, :phone_on, :slack_on)
   end
 end

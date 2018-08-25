@@ -1,7 +1,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 1041;
   padding-top: 100px;
   left: 0;
   top: 0;
@@ -19,7 +19,7 @@
   position: relative;
   top: 3vh;
   width: 27vw;
-  height: 70vh;
+  height: auto;
 
   .modal-header {
     position: relative;
@@ -47,7 +47,7 @@
     flex-direction: column;
     padding-top: 3.5vh;
 
-    input {
+    input, select {
       height: 5.5vh;
       width: 22vw;
       margin-top: 3.5vh;
@@ -65,8 +65,19 @@
         color: #95989a;
       }
 
-      &:focus {
+      &:focus, &:active {
         outline: none;
+        border: 1px solid #000;
+        background-color: none;
+        color: #000 !important;
+      }
+    }
+
+    input[type="datetime-local"] {
+      &:before {
+        content: 'Date/Time?';
+        margin-right: .6em;
+        color: #95989a;
       }
     }
 
@@ -79,7 +90,7 @@
       width: 19vw;
       margin-top: 5vh;
       margin-left: 2vw;
-      margin-bottom: 4vh;
+      // margin-bottom: 4vh;
       // background-color: #3359df;
       background-color: rgba(153, 123, 73, 1);
       border-radius: 5px;

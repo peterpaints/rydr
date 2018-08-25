@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag "rides" %>
-<%= javascript_include_tag 'rides' %>
 <div class="profile">
   <nav class="left-nav">
     <div class="logo">
@@ -9,14 +8,12 @@
     <div class="nav-title"><p>Available Rides</p></div>
     <div class="line-break"></div>
     <button class="left-nav-link vehicles-nav">
-      <i class="fa fa-car"></i><span>RIDES</span>
+      <i class="fa fa-car"></i><span>AVAILABLE RIDES</span>
     </button>
     <button class="left-nav-link profile-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "PROFILE", user_path(@user.id) %></span>
+      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(current_user) %></span>
     </button>
-    <button class="left-nav-link notifications-nav">
-      <i class="fa fa-car"></i><span>NOTIFICATIONS</span>
-    </button>
+    <div class="line-break"></div>
   </nav>
   <div class="right-container">
     <nav class="top-nav">
@@ -41,16 +38,11 @@
       <div class="filters">
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
-      <div class="tiles">
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/ride" %>
-        <%= render partial: "rides/partials/notifications" %>
+      <div class="tiles-rides all-rides">
+        <% @rides.each do |ride| %>
+          <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+        <% end %>
       </div>
-      <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
     </div>
   </div>
 </div>
-<%= render partial: "rides/partials/ride_form" %>

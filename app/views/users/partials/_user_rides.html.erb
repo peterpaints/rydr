@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag "rides" %>
+<div class="tiles-rides user-rides" style="top: 0; left: 0;">
+  <% @user.vehicles.each do |vehicle| %>
+    <% vehicle.rides.each do |ride| %>
+      <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+    <% end %>
+  <% end %>
+</div>

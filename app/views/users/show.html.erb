@@ -1,5 +1,4 @@
-<%= stylesheet_link_tag "profile" %>
-<%= javascript_include_tag 'profile' %>
+<%= stylesheet_link_tag "settings" %>
 <div class="profile">
   <nav class="left-nav">
     <div class="logo">
@@ -8,17 +7,12 @@
     </div>
     <div class="nav-title"><i class="fa fa-cogs"></i><span> Settings</span></div>
     <div class="line-break"></div>
-    <button class="left-nav-link vehicles-nav">
-      <i class="fa fa-car"></i><span>VEHICLES</span>
-    </button>
-    <button class="left-nav-link notifications-nav">
-      <i class="fa fa-bell"></i><span>NOTIFICATIONS</span>
-    </button>
     <button class="left-nav-link rides-nav">
-      <i class="fa fa-history"></i><span>RIDE HISTORY</span>
+      <i class="fa fa-car"></i><span><%= link_to "AVAILABLE RIDES", rides_path %></span>
     </button>
-    <div class="line-break"></div>
-    <button class="skip" type="button"><%= link_to "See Rides", rides_path %></button>
+    <button class="left-nav-link settings-nav">
+      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
+    </button>
     <div class="line-break"></div>
   </nav>
   <div class="right-container">
@@ -42,20 +36,37 @@
     </nav>
     <div class="content">
       <div class="filters">
-        <%= render partial: "users/partials/user_vehicle_filter" %>
-        <%= render partial: "users/partials/user_notifications_filter" %>
-        <%= render partial: "users/partials/user_rides_filter" %>
+        <div class="tabs">
+          <input id="tab1" type="radio" name="tabs" checked >
+          <label class="vehicles-nav" for="tab1">YOUR VEHICLES</label>
+          <input id="tab2" type="radio" name="tabs">
+          <label class="notifications-nav" for="tab2">CONTACT INFO</label>
+          <input id="tab3" type="radio" name="tabs">
+          <label class="ride-history-nav" for="tab3">OFFER A RIDE</label>
+        </div>
+        <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button>
       </div>
-      <div class="tiles">
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_vehicle" %>
-        <%= render partial: "users/partials/user_notifications" %>
+      <div class="tiles-settings">
+        <% @user.vehicles.each do |vehicle| %>
+          <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+        <% end %>
+        <%= render partial: "users/partials/user_notifications", locals: {user: @user} %>
+        <%= render partial: "users/partials/user_rides" %>
       </div>
       <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></button>
+      <button class="add-ride" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
     </div>
   </div>
+  <div>
+    <%= render partial: "vehicles/partials/vehicle_form" %>
+  </div>
+  <div>
+    <%= render partial: "rides/partials/ride_form", user: @user %>
+  </div>
+  <div>
+    <%= render partial: "rides/partials/confirm_delete" %>
+  </div>
+  <div>
+    <%= render partial: "vehicles/partials/confirm_delete" %>
+  </div>
 </div>
-<%= render partial: "vehicles/partials/vehicle_form" %>
