@@ -34,18 +34,21 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # Install javascript packages.
+      - run: yarn install
+
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-      
+
       - run: sudo apt install -y postgresql-client || true
 
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-        
+
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
@@ -55,4 +58,3 @@ jobs:
           name: run tests
           command: |
             bundle exec rspec
-            
