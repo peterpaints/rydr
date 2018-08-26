@@ -16,10 +16,10 @@
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.profiles.define 'rydr' do
-  load_profile 'rails'
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
   add_filter 'spec'
-  add_filter 'lib'
+  add_filter 'config'
 end
 
 Coveralls.wear!
