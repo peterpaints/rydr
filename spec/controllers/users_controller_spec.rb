@@ -22,15 +22,15 @@ RSpec.describe UsersController, type: :controller do
       end
       before(:each) { valid_request }
 
-      it 'increments users count by 1' do
+      it 'increases users count by 1' do
         expect(User.count).to be(1)
       end
 
-      it 'returns a status code of 302' do
+      it 'returns status_code 302' do
         expect(response.status).to eq 302
       end
 
-      it 'redirects to home_path' do
+      it 'redirects to user_path' do
         expect(response).to redirect_to user_path(User.first.id)
       end
     end
@@ -43,11 +43,11 @@ RSpec.describe UsersController, type: :controller do
       end
       before(:each) { invalid_request }
 
-      it 'does not increment user count' do
+      it 'does not increase user count' do
         expect(User.count).to be(0)
       end
 
-      it 'returns a status code of 302' do
+      it 'returns status_code 302' do
         expect(response.status).to eq 302
       end
 
