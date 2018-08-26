@@ -1,4 +1,4 @@
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   $('.tile-container-rides input[type=text], \
   .tile-container-rides input[type=datetime-local], \
   .tile-container-rides select')

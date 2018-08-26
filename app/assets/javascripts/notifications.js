@@ -1,4 +1,4 @@
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   $('.notifications-tile input[type=text]').attr('disabled', true);
   $('.notifications-tile .save').parent().hide();
   $('.phone-number').on('click', '.edit', (e) => {
