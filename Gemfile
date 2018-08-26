@@ -62,6 +62,7 @@ group :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'simplecov-rcov'
   gem 'webmock'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'

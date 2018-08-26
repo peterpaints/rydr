@@ -16,7 +16,12 @@
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.start 'rails'
+SimpleCov.profiles.define 'rydr' do
+  load_profile 'rails'
+  add_filter 'spec'
+  add_filter 'lib'
+end
+
 Coveralls.wear!
 
 RSpec.configure do |config|
