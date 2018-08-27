@@ -1,38 +1,7 @@
 <div class="profile">
-  <nav class="left-nav">
-    <div class="logo">
-      <%= image_tag "car-profile.svg" %>
-      <p>Rydr</p>
-    </div>
-    <div class="nav-title"><i class="fa fa-cogs"></i><span> Settings</span></div>
-    <div class="line-break"></div>
-    <button class="left-nav-link rides-nav">
-      <i class="fa fa-car"></i><span><%= link_to "AVAILABLE RIDES", rides_path %></span>
-    </button>
-    <button class="left-nav-link settings-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
-    </button>
-    <div class="line-break"></div>
-  </nav>
+  <%= render partial: "layouts/partials/side_nav" %>
   <div class="right-container">
-    <nav class="top-nav">
-      <div class="right-top-nav">
-        <div class="notifications-icon">
-          <%= image_tag "bell_icon.svg" %>
-          <span class="badge">20</span>
-        </div>
-        <div class="current-user">
-          <%= image_tag "user.svg" %>
-          <span><%= @user.email %></span>
-        </div>
-        <div class="dropdown-button">
-          <%= image_tag "menu.svg" %>
-          <div class="dropdown-content">
-            <%= link_to "Logout", logout_path %>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <%= render partial: "layouts/partials/top_nav" %>
     <div class="content">
       <div class="filters">
         <div class="tabs">
@@ -47,7 +16,7 @@
       </div>
       <div class="tiles-settings">
         <% @user.vehicles.each do |vehicle| %>
-          <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+        <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
         <% end %>
         <%= render partial: "users/partials/user_notifications", locals: {user: @user} %>
         <%= render partial: "users/partials/user_rides" %>
@@ -56,16 +25,16 @@
       <button class="add-ride" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
     </div>
   </div>
-  <div>
-    <%= render partial: "vehicles/partials/vehicle_form" %>
-  </div>
-  <div>
-    <%= render partial: "rides/partials/ride_form", user: @user %>
-  </div>
-  <div>
-    <%= render partial: "rides/partials/confirm_delete" %>
-  </div>
-  <div>
-    <%= render partial: "vehicles/partials/confirm_delete" %>
-  </div>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/vehicle_form" %>
+</div>
+<div>
+  <%= render partial: "rides/partials/ride_form", user: @user %>
+</div>
+<div>
+  <%= render partial: "rides/partials/confirm_delete" %>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/confirm_delete" %>
 </div>

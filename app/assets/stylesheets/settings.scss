@@ -54,13 +54,12 @@ $card-borders: #ff8000, #8d230f, #665600;
   height: 5vh;
   padding-top: .9vh;
   padding-left: 2vw;
-  &:active, &:focus {
+  outline: none;
+  &:active, &:focus, &:hover {
     background-color: rgba(255, 255, 255, .8);
     color: $badge-color;
     outline: none;
-    a {
-      color: $badge-color;
-    }
+    text-decoration: none;
   }
 
   i {
@@ -69,12 +68,6 @@ $card-borders: #ff8000, #8d230f, #665600;
 
   span {
     margin-left: .7vw;
-
-    a {
-      outline: none;
-      text-decoration: none;
-      color: $text-color;
-    }
   }
 }
 
@@ -316,6 +309,9 @@ $card-borders: #ff8000, #8d230f, #665600;
         color: rgba(0, 0, 0, 1);
         outline: none;
         text-decoration: none;
+      }
+      &:disabled {
+        background-color: #fff;
       }
     }
 

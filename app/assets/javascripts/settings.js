@@ -22,10 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  $('.settings-nav').focus();
-  // $('.notifications-tile').hide();
-  // $('.user-rides').hide();
-  // $('.add-ride').hide();
 
   $('.vehicles-nav').click(() => {
     localStorage.setItem('tab', '.vehicles-nav');

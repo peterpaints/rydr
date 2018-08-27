@@ -1,0 +1,18 @@
+<nav class="top-nav">
+  <div class="right-top-nav">
+    <div class="notifications-icon">
+      <%= image_tag "bell_icon.svg" %>
+      <span class="badge">20</span>
+    </div>
+    <div class="current-user">
+      <%= image_tag "user.svg" %>
+      <span><%= @user.email %></span>
+    </div>
+    <div class="dropdown-button">
+      <%= image_tag "menu.svg" %>
+      <div class="dropdown-content">
+        <%= link_to "Logout", logout_path %>
+      </div>
+    </div>
+  </div>
+</nav>

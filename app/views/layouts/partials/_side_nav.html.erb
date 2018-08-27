@@ -1,0 +1,23 @@
+<nav class="left-nav">
+  <div class="logo">
+    <%= image_tag "car-profile.svg" %>
+    <p>Rydr</p>
+  </div>
+  <div class="nav-title">
+    <% if current_page?(user_path(@user.id)) %>
+      <i class="fa fa-cogs"></i>
+      <span> Settings</span>
+    <% elsif current_page?(rides_path) %>
+      <i class="fa fa-car"></i>
+      <span> Available Rides</span>
+    <% end %>
+  </div>
+  <div class="line-break"></div>
+  <%= link_to rides_path, class: "left-nav-link rides-nav" do %>
+      <i class="fa fa-car"></i><span>AVAILABLE RIDES</span>
+  <% end %>
+  <%= link_to user_path(@user.id), class: "left-nav-link settings-nav" do %>
+      <i class="fa fa-cogs"></i><span>SETTINGS</span>
+  <% end %>
+  <div class="line-break"></div>
+</nav>

@@ -14,7 +14,7 @@
         </div>
       </div>
       <%= f.datetime_local_field :departure_time, class: "time", required: true,
-        value: ride.departure_time.localtime.strftime("%Y-%m-%dT%H:%M")
+        value: ride.departure_time.strftime("%Y-%m-%dT%H:%M")
       %>
     </div>
     <div class="tile-content">
