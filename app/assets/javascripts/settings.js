@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     '.ride-history-nav': '#tab3',
   };
   const content = {
-    '.vehicles-nav': ['.vehicle-tile', '.add-vehicle', '.filter-button'],
+    '.vehicles-nav': ['.vehicle-tiles', '.add-vehicle', '.filter-button'],
     '.notifications-nav': ['.notifications-tile'],
     '.ride-history-nav': ['.user-rides', '.add-ride', '.filter-button']
   };
-  const allContent = ['.vehicle-tile', '.add-vehicle', '.filter-button', '.notifications-tile','.user-rides', '.add-ride', '.filter-button']
+  const allContent = ['.vehicle-tiles', '.add-vehicle', '.filter-button', '.notifications-tile','.user-rides', '.add-ride', '.filter-button']
   const activeTab = localStorage.getItem('tab');
   if (activeTab) {
     $('.tabs input').attr('checked', false);
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('.vehicles-nav').click(() => {
     localStorage.setItem('tab', '.vehicles-nav');
-    $('.vehicle-tile').show();
+    $('.vehicle-tiles').show();
     $('.add-vehicle').show();
     $('.notifications-tile').hide();
     $('.user-rides').hide();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('.notifications-nav').click(() => {
     localStorage.setItem('tab', '.notifications-nav');
     $('.notifications-tile').show();
-    $('.vehicle-tile').hide();
+    $('.vehicle-tiles').hide();
     $('.add-vehicle').hide();
     $('.user-rides').hide();
     $('.add-ride').hide();
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('tab', '.ride-history-nav');
     $('.user-rides').show();
     $('.add-ride').show();
-    $('.vehicle-tile').hide();
+    $('.vehicle-tiles').hide();
     $('.add-vehicle').hide();
     $('.notifications-tile').hide();
     $('.filter-button').show();

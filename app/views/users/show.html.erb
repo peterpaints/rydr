@@ -15,14 +15,26 @@
         <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button>
       </div>
       <div class="tiles-settings">
-        <% @user.vehicles.each do |vehicle| %>
-        <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
-        <% end %>
+        <div class="vehicle-tiles">
+          <% if @user.vehicles.empty? %>
+            <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
+              You have no vehicles yet. Add one below :-)
+            </p>
+          <% else %>
+            <% @user.vehicles.each do |vehicle| %>
+              <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+            <% end %>
+          <% end %>
+        </div>
         <%= render partial: "users/partials/user_notifications", locals: {user: @user} %>
         <%= render partial: "users/partials/user_rides" %>
       </div>
-      <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></button>
-      <button class="add-ride" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
+      <%= link_to "#", data: {toggle: "modal", target: "#vehicle-modal"} do %>
+        <button class="add-vehicle" type="button">+</button>
+      <% end %>
+      <%= link_to "#", data: {toggle: "modal", target: "#ride-modal"} do %>
+        <button class="add-ride" type="button">+</button>
+      <% end %>
     </div>
   </div>
 </div>

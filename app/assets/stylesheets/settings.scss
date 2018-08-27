@@ -128,9 +128,9 @@ $card-borders: #ff8000, #8d230f, #665600;
 
     .badge {
       background: $badge-color;
-      position: absolute;
-      top: 1.5rem;
-      right: 16.1vw;
+      position: relative;
+      top: -1.5rem;
+      right: .9vw;
       color: #fff;
       height: 1.5rem;
       width: 1.5rem;
@@ -181,6 +181,11 @@ $card-borders: #ff8000, #8d230f, #665600;
   .content {
     background-color: rgba(248, 250, 251, .7);
     height: 92.5vh;
+    a {
+      outline: none;
+      text-decoration: none;
+      color: #fff;
+    }
   }
 }
 
