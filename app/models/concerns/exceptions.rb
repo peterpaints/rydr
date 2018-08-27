@@ -3,6 +3,6 @@
 module Exceptions
   extend ActiveSupport::Concern
 
-  class InvalidBooking < StandardError; end
+  class OwnerBooking < StandardError; end
   class RideFull < StandardError; end
 end

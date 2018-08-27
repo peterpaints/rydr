@@ -5,7 +5,7 @@ class RidesController < ApplicationController
   before_action :find_ride, only: %i[book cancel update destroy]
   before_action :find_current_user, only: %i[index book cancel]
 
-  rescue_from Exceptions::InvalidBooking, with: :ride_booking_error
+  rescue_from Exceptions::OwnerBooking, with: :ride_booking_error
   rescue_from Exceptions::RideFull, with: :ride_full_error
 
   def index
