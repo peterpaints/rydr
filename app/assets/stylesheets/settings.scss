@@ -124,13 +124,22 @@ $card-borders: #ff8000, #8d230f, #665600;
     justify-content: space-between;
     margin-left: auto;
     margin-right: 1vw;
-    width: 17vw;
+    width: 18vw;
+
+    .notifications-icon {
+      width: 1.5vw;
+
+      img {
+        position: relative;
+        top: 1.1vh;
+      }
+    }
 
     .badge {
       background: $badge-color;
       position: relative;
-      top: -1.5rem;
-      right: .9vw;
+      top: -3rem;
+      left: 1vw;
       color: #fff;
       height: 1.5rem;
       width: 1.5rem;
@@ -170,6 +179,11 @@ $card-borders: #ff8000, #8d230f, #665600;
         display: block;
         text-align: center;
         cursor: pointer;
+        &:before {
+          content: '\f08b';
+          font-family: 'FontAwesome';
+          margin-right: 10px;
+        }
       }
     }
 
