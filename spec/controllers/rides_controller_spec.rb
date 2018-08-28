@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe RidesController, type: :controller do
-  describe 'GET #index' do
-    let(:user) { create :user }
+  let(:user) { create :user }
+  let(:vehicle) { create(:vehicle) }
 
+  describe 'GET #index' do
     before do
       stub_current_user(user)
       get :index
@@ -19,8 +20,6 @@ RSpec.describe RidesController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:user) { create(:user) }
-    let(:vehicle) { create(:vehicle) }
     context 'create request is valid' do
       before do
         stub_current_user(user)
@@ -70,8 +69,6 @@ RSpec.describe RidesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:user) { create :user }
-    let(:vehicle) { create(:vehicle) }
     let(:ride) { create :ride, vehicle_id: vehicle.id }
 
     context 'when update request is valid' do
@@ -114,8 +111,6 @@ RSpec.describe RidesController, type: :controller do
   end
 
   describe 'GET #book' do
-    let(:user) { create :user }
-    let(:vehicle) { create(:vehicle) }
     let(:ride) { create(:ride, vehicle_id: vehicle.id) }
 
     context 'when user is not ride owner' do
@@ -167,8 +162,6 @@ RSpec.describe RidesController, type: :controller do
   end
 
   describe 'GET #cancel' do
-    let(:user) { create :user }
-    let(:vehicle) { create(:vehicle) }
     let(:ride) { create(:ride, vehicle_id: vehicle.id) }
 
     before do
@@ -195,10 +188,7 @@ RSpec.describe RidesController, type: :controller do
   end
 
   describe 'GET #destroy' do
-    let(:user) { create :user }
-    let(:vehicle) { create(:vehicle) }
     let(:ride) { create(:ride, vehicle_id: vehicle.id) }
-
     before do
       stub_current_user(user)
       get :destroy, params: { id: ride.id }

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe VehiclesController, type: :controller do
+  let(:user) { create(:user) }
+
   describe 'POST #create' do
-    let(:user) { create(:user) }
     context 'create request is valid' do
       before do
         stub_current_user(user)
@@ -51,7 +52,6 @@ RSpec.describe VehiclesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:user) { create :user }
     let(:vehicle) { create :vehicle }
 
     context 'when update request is valid' do
@@ -92,7 +92,6 @@ RSpec.describe VehiclesController, type: :controller do
   end
 
   describe 'GET #destroy' do
-    let(:user) { create :user }
     let(:vehicle) { create(:vehicle) }
 
     before do
