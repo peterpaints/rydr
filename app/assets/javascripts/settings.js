@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         $(allContent[i]).show();
       }
     }
+  } else {
+    $('.vehicle-tiles').show();
+    $('.add-vehicle').show();
+    $('.notifications-tile').hide();
+    $('.user-rides').hide();
+    $('.add-ride').hide();
+    $('.filter-button').show();
   }
 
   $('.vehicles-nav').click(() => {
