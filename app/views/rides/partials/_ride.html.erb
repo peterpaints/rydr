@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "rides" %>
 <div class="tile-container-rides">
   <span><i class="fa fa-check"></i></span>
   <%= form_for :ride, url: ride_path(ride.id), html: {class: "tile"}, method: :patch do |f| %>
@@ -39,7 +38,7 @@
       <div class="seating-capacity">
         <%= image_tag "capacity.svg" %>
         <div class="seats-left"><%=ride.users.count%></div>
-        <div class="seats-left"><%=ride.users.count > 1 ? 'Riders' : 'Rider'%></div>
+        <div class="seats-left"><%=ride.users.count == 1 ? 'Rider' : 'Riders'%></div>
       </div>
       <div class="ride-color">
         <%= image_tag "palette.svg" %>

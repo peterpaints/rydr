@@ -1,46 +1,20 @@
-<%= stylesheet_link_tag "rides" %>
 <div class="profile">
-  <nav class="left-nav">
-    <div class="logo">
-      <%= image_tag "car-profile.svg" %>
-      <p>Rydr</p>
-    </div>
-    <div class="nav-title"><p>Available Rides</p></div>
-    <div class="line-break"></div>
-    <button class="left-nav-link vehicles-nav">
-      <i class="fa fa-car"></i><span>AVAILABLE RIDES</span>
-    </button>
-    <button class="left-nav-link profile-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(current_user) %></span>
-    </button>
-    <div class="line-break"></div>
-  </nav>
+  <%= render partial: "layouts/partials/side_nav" %>
   <div class="right-container">
-    <nav class="top-nav">
-      <div class="right-top-nav">
-        <div class="notifications-icon notifications-nav">
-          <%= image_tag "bell_icon.svg" %>
-          <span class="badge">20</span>
-        </div>
-        <div class="current-user">
-          <%= image_tag "user.svg" %>
-          <span><%= @user.email %></span>
-        </div>
-        <div class="dropdown-button">
-          <%= image_tag "menu.svg" %>
-          <div class="dropdown-content">
-            <%= link_to "Logout", logout_path %>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <%= render partial: "layouts/partials/top_nav" %>
     <div class="content">
       <div class="filters">
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
       <div class="tiles-rides all-rides">
-        <% @rides.each do |ride| %>
-          <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+        <% if @rides.empty? %>
+          <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
+            No rides yet. Come back later :-)
+          </p>
+        <% else %>
+          <% @rides.each do |ride| %>
+            <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+          <% end %>
         <% end %>
       </div>
     </div>

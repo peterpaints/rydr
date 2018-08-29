@@ -1,4 +1,4 @@
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   $('.alert')
     .clearQueue()
     .slideDown(1000);

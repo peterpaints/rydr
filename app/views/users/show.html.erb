@@ -1,39 +1,7 @@
-<%= stylesheet_link_tag "settings" %>
 <div class="profile">
-  <nav class="left-nav">
-    <div class="logo">
-      <%= image_tag "car-profile.svg" %>
-      <p>Rydr</p>
-    </div>
-    <div class="nav-title"><i class="fa fa-cogs"></i><span> Settings</span></div>
-    <div class="line-break"></div>
-    <button class="left-nav-link rides-nav">
-      <i class="fa fa-car"></i><span><%= link_to "AVAILABLE RIDES", rides_path %></span>
-    </button>
-    <button class="left-nav-link settings-nav">
-      <i class="fa fa-cogs"></i><span><%= link_to "SETTINGS", user_path(@user.id) %></span>
-    </button>
-    <div class="line-break"></div>
-  </nav>
+  <%= render partial: "layouts/partials/side_nav" %>
   <div class="right-container">
-    <nav class="top-nav">
-      <div class="right-top-nav">
-        <div class="notifications-icon">
-          <%= image_tag "bell_icon.svg" %>
-          <span class="badge">20</span>
-        </div>
-        <div class="current-user">
-          <%= image_tag "user.svg" %>
-          <span><%= @user.email %></span>
-        </div>
-        <div class="dropdown-button">
-          <%= image_tag "menu.svg" %>
-          <div class="dropdown-content">
-            <%= link_to "Logout", logout_path %>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <%= render partial: "layouts/partials/top_nav" %>
     <div class="content">
       <div class="filters">
         <div class="tabs">
@@ -47,26 +15,38 @@
         <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button>
       </div>
       <div class="tiles-settings">
-        <% @user.vehicles.each do |vehicle| %>
-          <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
-        <% end %>
+        <div class="vehicle-tiles">
+          <% if @user.vehicles.empty? %>
+            <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
+              You have no vehicles yet. Add one below :-)
+            </p>
+          <% else %>
+            <% @user.vehicles.each do |vehicle| %>
+              <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+            <% end %>
+          <% end %>
+        </div>
         <%= render partial: "users/partials/user_notifications", locals: {user: @user} %>
         <%= render partial: "users/partials/user_rides" %>
       </div>
-      <button class="add-vehicle" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#vehicle-modal"} %></button>
-      <button class="add-ride" type="button"><%= link_to '+', "#", data: {toggle: "modal", target: "#ride-modal"} %></button>
+      <%= link_to "#", data: {toggle: "modal", target: "#vehicle-modal"} do %>
+        <button class="add-vehicle" type="button">+</button>
+      <% end %>
+      <%= link_to "#", data: {toggle: "modal", target: "#ride-modal"} do %>
+        <button class="add-ride" type="button">+</button>
+      <% end %>
     </div>
   </div>
-  <div>
-    <%= render partial: "vehicles/partials/vehicle_form" %>
-  </div>
-  <div>
-    <%= render partial: "rides/partials/ride_form", user: @user %>
-  </div>
-  <div>
-    <%= render partial: "rides/partials/confirm_delete" %>
-  </div>
-  <div>
-    <%= render partial: "vehicles/partials/confirm_delete" %>
-  </div>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/vehicle_form" %>
+</div>
+<div>
+  <%= render partial: "rides/partials/ride_form", user: @user %>
+</div>
+<div>
+  <%= render partial: "rides/partials/confirm_delete" %>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/confirm_delete" %>
 </div>

@@ -8,10 +8,12 @@ class Vehicle < ApplicationRecord
   VALID_CAPACITY = /[1-9]/
 
   validates :make, :model, :license_plate, :capacity, :color,
-            presence: { message: 'Please enter every attribute.' }
+            presence: true
+
   validates :license_plate,
             uniqueness: { message: 'That vehicle already exists.' },
-            format: { with: VALID_PLATE, message: 'Invalid plate format.' }
+            format: { with: VALID_PLATE }
+
   validates :capacity,
-            format: { with: VALID_CAPACITY, message: 'Invalid capacity format.' }
+            format: { with: VALID_CAPACITY }
 end

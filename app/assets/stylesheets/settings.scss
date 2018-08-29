@@ -54,13 +54,12 @@ $card-borders: #ff8000, #8d230f, #665600;
   height: 5vh;
   padding-top: .9vh;
   padding-left: 2vw;
-  &:active, &:focus {
+  outline: none;
+  &:active, &:focus, &:hover {
     background-color: rgba(255, 255, 255, .8);
     color: $badge-color;
     outline: none;
-    a {
-      color: $badge-color;
-    }
+    text-decoration: none;
   }
 
   i {
@@ -69,12 +68,6 @@ $card-borders: #ff8000, #8d230f, #665600;
 
   span {
     margin-left: .7vw;
-
-    a {
-      outline: none;
-      text-decoration: none;
-      color: $text-color;
-    }
   }
 }
 
@@ -131,13 +124,35 @@ $card-borders: #ff8000, #8d230f, #665600;
     justify-content: space-between;
     margin-left: auto;
     margin-right: 1vw;
-    width: 17vw;
+    width: 18vw;
+
+    .notifications-icon {
+      width: 1.5vw;
+      &:hover .notifications-dropdown {
+        display: block;
+      }
+
+      img {
+        position: relative;
+        top: 1.1vh;
+      }
+
+      .notifications-dropdown {
+        display: none;
+        position: absolute;
+        right: 17vw;
+        background-color: #f9f9f9;
+        min-width: 7vw;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 9999;
+      }
+    }
 
     .badge {
       background: $badge-color;
-      position: absolute;
-      top: 1.5rem;
-      right: 16.1vw;
+      position: relative;
+      top: -3rem;
+      left: 1vw;
       color: #fff;
       height: 1.5rem;
       width: 1.5rem;
@@ -177,6 +192,11 @@ $card-borders: #ff8000, #8d230f, #665600;
         display: block;
         text-align: center;
         cursor: pointer;
+        &:before {
+          content: '\f08b';
+          font-family: 'FontAwesome';
+          margin-right: 10px;
+        }
       }
     }
 
@@ -188,6 +208,11 @@ $card-borders: #ff8000, #8d230f, #665600;
   .content {
     background-color: rgba(248, 250, 251, .7);
     height: 92.5vh;
+    a {
+      outline: none;
+      text-decoration: none;
+      color: #fff;
+    }
   }
 }
 
@@ -271,7 +296,7 @@ $card-borders: #ff8000, #8d230f, #665600;
   // display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-content: flex-start;
+  align-content: center;
   justify-content: space-between;
   height: 75vh;
   width: 77vw;
@@ -316,6 +341,9 @@ $card-borders: #ff8000, #8d230f, #665600;
         color: rgba(0, 0, 0, 1);
         outline: none;
         text-decoration: none;
+      }
+      &:disabled {
+        background-color: #fff;
       }
     }
 

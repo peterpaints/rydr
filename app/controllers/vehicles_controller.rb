@@ -2,7 +2,7 @@
 
 class VehiclesController < ApplicationController
   before_action :require_login
-  before_action :find_vehicle, only: [:update, :destroy]
+  before_action :find_vehicle, only: %i[update destroy]
 
   def new
     @vehicle = Vehicle.new
@@ -39,13 +39,13 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
   end
 
-  def vehicle_save_success(message=nil)
+  def vehicle_save_success(message = nil)
     flash[:success] = message || 'Vehicle saved!'
     redirect_to user_path(current_user)
   end
 
   def vehicle_save_error(vehicle)
-    vehicle.errors.each do |attr, message|
+    vehicle.errors.each do |_attr, message|
       flash[:danger] = message
     end
     redirect_to user_path(current_user)
