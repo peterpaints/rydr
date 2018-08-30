@@ -16,7 +16,8 @@ RSpec.describe Ride, type: :model do
     it { is_expected.to validate_presence_of(:vehicle_id) }
 
     it do
-      subject.vehicle = create(:vehicle)
+      vehicle = create(:vehicle)
+      create(:ride, vehicle_id: vehicle.id)
       is_expected.to validate_uniqueness_of(:vehicle_id)
         .scoped_to(:departure_time).with_message(taken)
     end
