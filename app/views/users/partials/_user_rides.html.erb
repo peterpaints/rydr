@@ -1,5 +1,5 @@
 <div class="tiles-rides user-rides" style="top: 0; left: 0;">
-  <% rides = @user.vehicles.map { |vehicle| vehicle.rides } %>
+  <% rides = @user.vehicles.map(&:rides).flatten %>
   <% if rides.empty? %>
     <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
       You have no rides yet. Add one below :-)

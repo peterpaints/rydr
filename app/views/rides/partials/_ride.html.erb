@@ -20,7 +20,7 @@
     <div class="tile-content">
       <div class="ride-vehicle">
         <%= image_tag "vehicle.svg" %>
-        <%= f.collection_select :vehicle_id, user.vehicles, :id, :license_plate,
+        <%= f.collection_select :vehicle_id, current_page?(rides_path) ? [ride.vehicle] : user.vehicles, :id, :license_plate,
           {selected: ride.vehicle.id},
           {class: "license-plate"}
         %>
@@ -43,6 +43,12 @@
       <div class="ride-color">
         <%= image_tag "palette.svg" %>
         <div class="ride-details"><%=ride.vehicle.color%> <%=ride.vehicle.make%> <%=ride.vehicle.model%></div>
+      </div>
+      <div class="ride-owner">
+        <% if ride.vehicle.user != user %>
+          <div>by:</div>
+          <div class="owner"><%=ride.vehicle.user.email.split('@')[0]%></div>
+        <% end %>
       </div>
     </div>
     <div class="ride-footer">

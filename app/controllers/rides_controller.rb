@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RidesController < ApplicationController
+  include Notifications
+
   before_action :require_login
   before_action :find_ride, only: %i[book cancel update destroy]
   before_action :find_current_user, only: %i[index book cancel]
@@ -9,7 +11,15 @@ class RidesController < ApplicationController
   rescue_from Exceptions::RideFull, with: :ride_full_error
 
   def index
-    @rides = Ride.where('departure_time > ?', Time.now)
+    @rides = Ride.where('departure_time > ?', Time.now).order(created_at: :desc)
+    if params[:filter]
+      @rides = @rides.reverse if params[:filter] == 'asc'
+      @rides = @rides.joins(:users).where(users: {id: @user.id}) if params[:filter] == 'mine'
+      
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def create
@@ -23,6 +33,9 @@ class RidesController < ApplicationController
 
   def update
     if @ride.update(ride_params)
+      @ride.users.each do |user|
+        notify(user, update_message(@ride))
+      end
       ride_save_success
     else
       ride_save_error(@ride)
@@ -31,18 +44,23 @@ class RidesController < ApplicationController
 
   def book
     @ride.users << @user
+    notify(@ride.vehicle.user, book_message(@ride, @user))
     flash[:success] = 'Ride booked!'
     redirect_to rides_path
   end
 
   def cancel
     @ride.users.delete(@user)
+    notify(@ride.vehicle.user, cancel_message(@ride, @user))
     flash[:success] = 'Ride cancelled. What\'s up?'
     redirect_to rides_path
   end
 
   def destroy
     if @ride.destroy
+      @ride.users.each do |user|
+        notify(user, destroy_message(@ride))
+      end
       ride_save_success('Ride deleted. Now we have to walk?')
     else
       ride_save_error(@ride)

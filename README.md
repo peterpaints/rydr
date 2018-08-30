@@ -34,6 +34,12 @@ git checkout develop
 bundle
 ```
 
+>Change the database.yml to add your postgres username and password in case you need it:
+```
+username: rydr (or your postgres instance username)
+password: ****
+```
+
 >Create and Migrate the dbs
 ```
 rails db:setup

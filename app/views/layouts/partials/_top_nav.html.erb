@@ -1,19 +1,7 @@
 <nav class="top-nav">
   <div class="right-top-nav">
-    <div class="notifications-icon">
-      <%= image_tag "bell_icon.svg" %>
-      <span class="badge">20</span>
-      <div class="notifications-dropdown">
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-        <p>Yadda yadda yadda</p>
-      </div>
+    <div class="notifications-top-nav">
+      <%= render partial: "layouts/partials/notification_dropdown" %>
     </div>
     <div class="current-user">
       <%= image_tag "user.svg" %>

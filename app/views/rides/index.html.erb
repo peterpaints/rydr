@@ -7,15 +7,7 @@
         <%= render partial: "rides/partials/rides_filter" %>
       </div>
       <div class="tiles-rides all-rides">
-        <% if @rides.empty? %>
-          <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
-            No rides yet. Come back later :-)
-          </p>
-        <% else %>
-          <% @rides.each do |ride| %>
-            <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
-          <% end %>
-        <% end %>
+        <%= render partial: "rides/partials/all_rides" %>
       </div>
     </div>
   </div>

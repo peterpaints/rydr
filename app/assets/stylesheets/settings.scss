@@ -141,10 +141,37 @@ $card-borders: #ff8000, #8d230f, #665600;
         display: none;
         position: absolute;
         right: 17vw;
-        background-color: #f9f9f9;
-        min-width: 7vw;
+        background-color: rgba(248, 250, 251, .7);
+        min-width: 11vw;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 9999;
+        height: 25vh;
+        max-height: 30vh;
+        overflow: scroll;
+        padding: .5%;
+        &:before {
+          display: block;
+          content: "";
+          height: 0;
+          width: 0;
+          border: solid transparent;
+          position: absolute;
+          top: -8%;
+          left: 81.5%;
+          border-bottom-color: rgba(248, 250, 251, 1);
+          border-width: 10px;
+          z-index: 9998;
+        }
+      }
+
+      .notification {
+        max-height: 6vh;
+        border: 1px solid lightgray;
+        border-radius: 2.5px;
+        max-width: 10.5vw;
+        overflow: scroll;
+        padding: 5%;
+        margin-bottom: 5%;
       }
     }
 
