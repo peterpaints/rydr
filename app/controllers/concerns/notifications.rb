@@ -13,7 +13,7 @@ module Notifications
   end
 
   def book_message(ride, rider)
-    "#{rider.email.split('@')[0]} booked your 
+    "#{rider.email.split('@')[0]} booked your
     ride (#{ride.origin} to #{ride.destination})."
   end
 

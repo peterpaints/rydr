@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   before_action :require_login
   before_action :find_current_user, only: %i[mark_as_read]
 
   def create
     @notification = Notification.new(ride_params)
-    notification_save_error(@notification) if !@notification.save
+    notification_save_error(@notification) unless @notification.save
   end
 
   def mark_as_read

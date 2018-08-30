@@ -9,17 +9,12 @@ class RidesController < ApplicationController
 
   rescue_from Exceptions::OwnerBooking, with: :ride_booking_error
   rescue_from Exceptions::RideFull, with: :ride_full_error
+  rescue_from Exceptions::VehicleOverload, with: :vehicle_overload_error
+  rescue_from Exceptions::InvalidTime, with: :invalid_time_error
 
   def index
     @rides = Ride.where('departure_time > ?', Time.now).order(created_at: :desc)
-    if params[:filter]
-      @rides = @rides.reverse if params[:filter] == 'asc'
-      @rides = @rides.joins(:users).where(users: {id: @user.id}) if params[:filter] == 'mine'
-      
-      respond_to do |format|
-        format.js
-      end
-    end
+    filter_rides(params[:filter]) if params[:filter]
   end
 
   def create
@@ -92,11 +87,32 @@ class RidesController < ApplicationController
     redirect_to rides_path
   end
 
+  def vehicle_overload_error
+    flash[:danger] = 'Sorry, ride capacity cannot be greater than vehicle
+    capacity.'
+    redirect_to user_path(current_user)
+  end
+
+  def invalid_time_error
+    flash[:danger] = 'Rides should be at least 3 minutes from now.'
+    redirect_to user_path(current_user)
+  end
+
   def ride_save_error(ride)
     ride.errors.each do |_attr, message|
       flash[:danger] = message
     end
     redirect_to user_path(current_user)
+  end
+
+  def filter_rides(param)
+    @rides = @rides.reverse if param == 'asc'
+    if param == 'mine'
+      @rides = @rides.joins(:users)
+                     .where(users: { id: @user.id })
+    end
+
+    respond_to { |format| format.js }
   end
 
   def ride_params
