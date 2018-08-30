@@ -1,4 +1,12 @@
 <nav class="top-nav">
+  <% if current_page?(rides_path) %>
+    <%= form_tag rides_path, method: :get, remote: true, class: "search-form" do %>
+      <div class="search">
+        <%= search_field_tag :destination, params[:destination], placeholder: 'Where are you going?' %>
+      </div>
+      <%= submit_tag "Search", name: nil, class: "search-button", style: "display: none;" %>
+    <% end %>
+  <% end %>
   <div class="right-top-nav">
     <div class="notifications-top-nav">
       <%= render partial: "layouts/partials/notification_dropdown" %>

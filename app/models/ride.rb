@@ -22,6 +22,11 @@ class Ride < ApplicationRecord
   before_save :ride_capacity_not_more_than_vehicle,
               :departure_time_cannot_be_past
 
+  scope :destination, lambda { |destination|
+    where('lower(destination) like ?',
+          "%#{destination.downcase}%")
+  }
+
   def booked?(user)
     users.include? user
   end

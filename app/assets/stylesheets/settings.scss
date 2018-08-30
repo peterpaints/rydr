@@ -115,6 +115,41 @@ $card-borders: #ff8000, #8d230f, #665600;
     display: flex;
     flex-direction: row;
     height: 7.5vh;
+
+    .search-form {
+      margin-right: auto;
+
+      input {
+        height: 7.5vh;
+        width: 55vw;
+        box-shadow: none;
+        border: 0;
+        padding-left: 1vw;
+        color: rgba(0, 0, 0, .7);
+        font-family: 'Montserrat';
+        font-size: 1.3vw;
+        font-weight: 100;
+        &::placeholder {
+          color: rgba(0, 0, 0, .35);
+          font-family: 'Montserrat';
+          font-size: 1.3vw;
+          font-weight: 100;
+        }
+        &:focus {
+          outline: none;
+        }
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+          color: white;
+          border: none;
+          -webkit-box-shadow: 0 0 0 50px #fff inset !important;
+          box-shadow: 0 0 0 50px #fff inset !important;
+          transition: background-color 5000s ease-in-out 0s;
+          outline: none;
+        }
+      }
+    }
   }
 
   .right-top-nav {

@@ -14,7 +14,7 @@ class RidesController < ApplicationController
 
   def index
     @rides = Ride.where('departure_time > ?', Time.now).order(created_at: :desc)
-    filter_rides(params[:filter]) if params[:filter]
+    filter_rides(params) if params[:filter] || params[:destination]
   end
 
   def create
@@ -105,11 +105,14 @@ class RidesController < ApplicationController
     redirect_to user_path(current_user)
   end
 
-  def filter_rides(param)
-    @rides = @rides.reverse if param == 'asc'
-    if param == 'mine'
-      @rides = @rides.joins(:users)
-                     .where(users: { id: @user.id })
+  def filter_rides(params)
+    @rides = @rides.reverse if params[:filter] == 'asc'
+    if params[:filter] == 'mine'
+      @rides = @rides.joins(:users).where(users: { id: @user.id })
+    end
+
+    search_params(params).each do |key, value|
+      @rides = @rides.public_send(key, value) if value.present?
     end
 
     respond_to { |format| format.js }
@@ -118,5 +121,9 @@ class RidesController < ApplicationController
   def ride_params
     params.require(:ride).permit(:destination, :origin, :capacity,
                                  :departure_time, :vehicle_id)
+  end
+
+  def search_params(params)
+    params.slice(:destination)
   end
 end
