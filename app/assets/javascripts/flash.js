@@ -4,5 +4,5 @@ document.addEventListener('DOMContentLoaded', () => {
     .slideDown(1000);
   setTimeout(() => {
     $('.alert').slideUp(1000);
-  }, 3000);
+  }, 5000);
 });

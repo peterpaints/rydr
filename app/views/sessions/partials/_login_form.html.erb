@@ -5,11 +5,7 @@
 </div>
 <div class="password">
   <i class="fa fa-key icon"></i>
-  <%= password_field_tag :password, '', required: true,
-  pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}',
-  placeholder: "....",
-  title: "Password must contain at least 6 characters, including UPPER/lowercase and numbers"
-  %>
+  <%= password_field_tag :password, '', required: true, placeholder: "...." %>
 </div>
 <div class="remember">
   <%= check_box_tag :remember_me %>

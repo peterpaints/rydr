@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :vehicles, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_and_belongs_to_many :rides
 
   has_secure_password

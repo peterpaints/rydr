@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get '/rides/:id/book', to: 'rides#book', as: 'book_ride'
   get '/rides/:id/cancel', to: 'rides#cancel', as: 'cancel_ride'
 
+  get '/notifications/mark_as_read', to: 'notifications#mark_as_read', as: 'mark_as_read'
+
   resources :vehicles
   resources :rides
+  resources :notifications
 end

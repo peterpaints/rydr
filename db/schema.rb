@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_230427) do
+ActiveRecord::Schema.define(version: 2018_08_30_121919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
 
   create_table "rides", force: :cascade do |t|
     t.string "origin"
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(version: 2018_08_24_230427) do
     t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
+  add_foreign_key "notifications", "users"
   add_foreign_key "rides", "vehicles"
   add_foreign_key "vehicles", "users"
 end
