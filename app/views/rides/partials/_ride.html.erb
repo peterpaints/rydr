@@ -39,6 +39,14 @@
         <%= image_tag "capacity.svg" %>
         <div class="seats-left"><%=ride.users.count%></div>
         <div class="seats-left"><%=ride.users.count == 1 ? 'Rider' : 'Riders'%></div>
+        <% passengers = ride.users.map(&:email) %>
+        <% if !passengers.empty? %>
+          <ul class="tooltip-text">
+            <% passengers.each do |passenger| %>
+              <li><%= passenger.split('@')[0] %></li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
       <div class="ride-color">
         <%= image_tag "palette.svg" %>

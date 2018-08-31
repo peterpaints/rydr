@@ -260,6 +260,7 @@ $card-borders: #ff8000, #8d230f, #665600;
         align-items: center;
         justify-content: space-between;
         margin-left: 5vw;
+        position: relative;
         input {
           width: 2vw !important;
         }
@@ -271,6 +272,24 @@ $card-borders: #ff8000, #8d230f, #665600;
 
         .seats-left {
           margin-left: 1vw;
+        }
+
+        .tooltip-text {
+          visibility: hidden;
+          background-color: #000000;
+          color: white;
+          text-align: center;
+          border-radius: 6px;
+          width: 120px;
+          position: absolute;
+          z-index: 2;
+          padding: 5px 0;
+          top: 100%;
+          left: 50%;
+        }
+
+        &:hover .tooltip-text {
+          visibility: visible;
         }
       }
 
