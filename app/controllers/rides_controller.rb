@@ -15,7 +15,8 @@ class RidesController < ApplicationController
   rescue_from Exceptions::RiderLacksSeating, with: :rider_lacks_seating_error
 
   def index
-    @rides = Ride.where('departure_time > ?', Time.now).order(created_at: :desc)
+    @rides = Ride.includes(:users).where('departure_time > ?', Time.now)
+                 .order(created_at: :desc)
     filter_rides(params) if params[:filter] || params[:destination]
   end
 
