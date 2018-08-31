@@ -7,4 +7,5 @@ module Exceptions
   class RideFull < StandardError; end
   class VehicleOverload < StandardError; end
   class InvalidTime < StandardError; end
+  class RiderLacksSeating < StandardError; end
 end

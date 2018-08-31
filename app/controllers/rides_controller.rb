@@ -12,6 +12,7 @@ class RidesController < ApplicationController
   rescue_from Exceptions::RideFull, with: :ride_full_error
   rescue_from Exceptions::VehicleOverload, with: :vehicle_overload_error
   rescue_from Exceptions::InvalidTime, with: :invalid_time_error
+  rescue_from Exceptions::RiderLacksSeating, with: :rider_lacks_seating_error
 
   def index
     @rides = Ride.where('departure_time > ?', Time.now).order(created_at: :desc)
@@ -96,6 +97,11 @@ class RidesController < ApplicationController
 
   def invalid_time_error
     flash[:danger] = 'Rides should be at least 3 minutes from now.'
+    redirect_to user_path(current_user)
+  end
+
+  def rider_lacks_seating_error
+    flash[:danger] = 'Some rider(s) will lack seats.'
     redirect_to user_path(current_user)
   end
 

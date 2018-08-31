@@ -40,7 +40,7 @@
         <div class="seats-left"><%=ride.users.count%></div>
         <div class="seats-left"><%=ride.users.count == 1 ? 'Rider' : 'Riders'%></div>
         <% passengers = ride.users.map(&:email) %>
-        <% if !passengers.empty? %>
+        <% if passengers.any? %>
           <ul class="tooltip-text">
             <% passengers.each do |passenger| %>
               <li><%= passenger.split('@')[0] %></li>

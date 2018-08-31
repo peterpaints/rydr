@@ -20,7 +20,8 @@ class Ride < ApplicationRecord
             format: { with: VALID_CAPACITY }
 
   before_save :ride_capacity_not_more_than_vehicle,
-              :departure_time_cannot_be_past
+              :departure_time_cannot_be_past,
+              :invalid_capacity_update
 
   scope :destination, lambda { |destination|
     where('lower(destination) like ?',
@@ -45,5 +46,9 @@ class Ride < ApplicationRecord
 
   def departure_time_cannot_be_past
     raise InvalidTime if departure_time < Time.now.localtime + 3.minutes
+  end
+
+  def invalid_capacity_update
+    raise RiderLacksSeating if users.any? && capacity < users.size
   end
 end
