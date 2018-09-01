@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   before_action :find_current_user, only: %i[mark_as_read]
 
   def create
-    @notification = Notification.new(ride_params)
+    @notification = Notification.new(notification_params)
     notification_save_error(@notification) unless @notification.save
   end
 
