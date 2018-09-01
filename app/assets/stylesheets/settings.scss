@@ -119,12 +119,26 @@ $card-borders: #ff8000, #8d230f, #665600;
     .search-form {
       margin-right: auto;
 
+      .search {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: "";
+          background: url(search_icon.svg) no-repeat;
+          background-position-x: 1vw;
+          background-position-y: 52.75%;
+          top: 0;
+          bottom: 0;
+          width: 3vw;
+        }
+      }
+
       input {
         height: 7.5vh;
         width: 55vw;
         box-shadow: none;
         border: 0;
-        padding-left: 1vw;
+        padding-left: 2.5vw;
         color: rgba(0, 0, 0, .7);
         font-family: 'Montserrat';
         font-size: 1.3vw;
@@ -200,7 +214,6 @@ $card-borders: #ff8000, #8d230f, #665600;
       }
 
       .notification {
-        max-height: 6vh;
         border: 1px solid lightgray;
         border-radius: 2.5px;
         max-width: 10.5vw;
