@@ -18,8 +18,31 @@
 @import url('https://fonts.googleapis.com/css?family=Cantarell');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100');
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+input {
+  text-transform: capitalize;
+
+  &::placeholder {
+    text-transform: none;
+  }
+}
+
+#vehicle_license_plate {
+  text-transform: uppercase;
+}
+
+.email,
+.password,
+.confirm-password,
+.search {
+  input {
+    text-transform: none;
+  }
 }

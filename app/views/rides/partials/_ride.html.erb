@@ -53,9 +53,11 @@
         <div class="ride-details"><%=ride.vehicle.color%> <%=ride.vehicle.make%> <%=ride.vehicle.model%></div>
       </div>
       <div class="ride-owner">
+        <div>by:</div>
         <% if ride.vehicle.user != user %>
-          <div>by:</div>
           <div class="owner"><%=ride.vehicle.user.email.split('@')[0]%></div>
+        <% else %>
+          <div class="owner">you</div>
         <% end %>
       </div>
     </div>
@@ -73,10 +75,12 @@
           <i class="fa fa-save"></i>
           <%= f.submit "Save", class: "save" %>
         </div>
-        <div class="book-btn update-btn" style="display: <%=ride.booked?(user) ? 'none' : 'flex' %>;">
-          <i class="fa fa-car"></i>
-          <div class="edit-ride"><%= link_to "Book", book_ride_path(ride.id) %></div>
-        </div>
+        <% if ride.vehicle.user != user %>
+          <div class="book-btn update-btn" style="display: <%=ride.booked?(user) ? 'none' : 'flex' %>;">
+            <i class="fa fa-car"></i>
+            <div class="edit-ride"><%= link_to "Book", book_ride_path(ride.id) %></div>
+          </div>
+        <% end %>
         <div class="delete-btn update-btn">
           <i class="fa fa-trash"></i>
           <div class="delete-ride"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-ride-modal", href: ride_path(ride.id)} %></div>
