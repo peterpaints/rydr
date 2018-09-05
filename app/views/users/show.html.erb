@@ -16,17 +16,17 @@
       </div>
       <div class="tiles-settings">
         <div class="vehicle-tiles">
-          <% if @user.vehicles.empty? %>
+          <% if current_user.vehicles.empty? %>
             <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
               You have no vehicles yet. Add one below :-)
             </p>
           <% else %>
-            <% @user.vehicles.each do |vehicle| %>
+            <% current_user.vehicles.each do |vehicle| %>
               <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
             <% end %>
           <% end %>
         </div>
-        <%= render partial: "users/partials/user_notifications", locals: {user: @user} %>
+        <%= render partial: "users/partials/user_notifications", locals: {user: current_user} %>
         <%= render partial: "users/partials/user_rides" %>
       </div>
       <%= link_to "#", data: {toggle: "modal", target: "#vehicle-modal"} do %>
@@ -42,7 +42,7 @@
   <%= render partial: "vehicles/partials/vehicle_form" %>
 </div>
 <div>
-  <%= render partial: "rides/partials/ride_form", user: @user %>
+  <%= render partial: "rides/partials/ride_form", user: current_user %>
 </div>
 <div>
   <%= render partial: "rides/partials/confirm_delete" %>

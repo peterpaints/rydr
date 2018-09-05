@@ -23,7 +23,7 @@ RSpec.describe NotificationsController, type: :controller do
       get :mark_as_read, xhr: true
     end
 
-    it 'notification to be marked as read' do
+    it 'marks notifications as read' do
       expect(user.notifications.first.reload.read).to eq true
     end
   end

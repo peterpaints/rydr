@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Ride < ApplicationRecord
-  include Exceptions
+  include RideExceptions
 
   has_and_belongs_to_many :users, before_add: %i[ride_owner_cannot_book
                                                  cannot_book_full_ride]
@@ -23,6 +23,18 @@ class Ride < ApplicationRecord
               :departure_time_cannot_be_past,
               :invalid_capacity_update
 
+  scope :available_rides, lambda {
+    includes(:users)
+      .where('departure_time > ?', Time.now)
+      .order(created_at: :desc)
+  }
+
+  scope :filter_by_user, lambda { |user|
+    joins(:users)
+      .where(users: { id: user.id })
+      .order(created_at: :desc)
+  }
+
   scope :destination, lambda { |destination|
     where('lower(destination) like ?',
           "%#{destination.downcase}%")
@@ -30,25 +42,5 @@ class Ride < ApplicationRecord
 
   def booked?(user)
     users.include? user
-  end
-
-  def ride_owner_cannot_book(user)
-    raise OwnerBooking if user.vehicles.include? vehicle
-  end
-
-  def cannot_book_full_ride(_user)
-    raise RideFull if users.size == capacity
-  end
-
-  def ride_capacity_not_more_than_vehicle
-    raise VehicleOverload if capacity > vehicle.capacity
-  end
-
-  def departure_time_cannot_be_past
-    raise InvalidTime if departure_time < Time.now.localtime + 3.minutes
-  end
-
-  def invalid_capacity_update
-    raise RiderLacksSeating if users.any? && capacity < users.size
   end
 end

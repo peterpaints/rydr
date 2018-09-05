@@ -41,19 +41,19 @@ class VehiclesController < ApplicationController
 
   def vehicle_save_success(message = nil)
     flash[:success] = message || 'Vehicle saved!'
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user.id)
   end
 
   def vehicle_save_error(vehicle)
     vehicle.errors.each do |_attr, message|
       flash[:danger] = message
     end
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user.id)
   end
 
   def vehicle_params
     params.require(:vehicle).permit(:make, :model, :license_plate,
                                     :capacity, :color)
-          .merge(user_id: current_user)
+          .merge(user_id: current_user.id)
   end
 end

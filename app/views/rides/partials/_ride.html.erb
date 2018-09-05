@@ -53,11 +53,13 @@
         <div class="ride-details"><%=ride.vehicle.color%> <%=ride.vehicle.make%> <%=ride.vehicle.model%></div>
       </div>
       <div class="ride-owner">
-        <div>by:</div>
-        <% if ride.vehicle.user != user %>
-          <div class="owner"><%=ride.vehicle.user.email.split('@')[0]%></div>
-        <% else %>
-          <div class="owner">you</div>
+        <% if current_page?(rides_path) %>
+          <div>by:</div>
+          <% if ride.vehicle.user != user %>
+            <div class="owner"><%=ride.vehicle.user.email.split('@')[0]%></div>
+          <% else %>
+            <div class="owner">you</div>
+          <% end %>
         <% end %>
       </div>
     </div>

@@ -15,7 +15,7 @@
       pattern: '^[0-9]$',
       title: "Capacity must be a number, e.g. 5",
       placeholder: "Capacity e.g. 5" %>
-      <%= f.collection_select :vehicle_id, @user.vehicles, :id, :license_plate,
+      <%= f.collection_select :vehicle_id, current_user.vehicles, :id, :license_plate,
         {prompt: "Select a Car"},
         {required: true}
       %>

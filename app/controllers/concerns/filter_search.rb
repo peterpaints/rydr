@@ -5,9 +5,7 @@ module FilterSearch
 
   def filter_rides(params)
     @rides = @rides.reverse if params[:filter] == 'asc'
-    if params[:filter] == 'mine'
-      @rides = @rides.joins(:users).where(users: { id: @user.id })
-    end
+    @rides = @rides.filter_by_user(current_user) if params[:filter] == 'mine'
 
     search_params(params).each do |key, value|
       @rides = @rides.public_send(key, value) if value.present?

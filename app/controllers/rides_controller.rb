@@ -1,22 +1,15 @@
 # frozen_string_literal: true
 
 class RidesController < ApplicationController
+  include ExceptionHandler
   include Notifications
   include FilterSearch
 
   before_action :require_login
   before_action :find_ride, only: %i[book cancel update destroy]
-  before_action :find_current_user, only: %i[index book cancel]
-
-  rescue_from Exceptions::OwnerBooking, with: :ride_booking_error
-  rescue_from Exceptions::RideFull, with: :ride_full_error
-  rescue_from Exceptions::VehicleOverload, with: :vehicle_overload_error
-  rescue_from Exceptions::InvalidTime, with: :invalid_time_error
-  rescue_from Exceptions::RiderLacksSeating, with: :rider_lacks_seating_error
 
   def index
-    @rides = Ride.includes(:users).where('departure_time > ?', Time.now)
-                 .order(created_at: :desc)
+    @rides = Ride.available_rides
     filter_rides(params) if params[:filter] || params[:destination]
   end
 
@@ -41,15 +34,15 @@ class RidesController < ApplicationController
   end
 
   def book
-    @ride.users << @user
-    notify(@ride.vehicle.user, book_message(@ride, @user))
+    @ride.users << current_user
+    notify(@ride.vehicle.user, book_message(@ride, current_user))
     flash[:success] = 'Ride booked!'
     redirect_to rides_path
   end
 
   def cancel
-    @ride.users.delete(@user)
-    notify(@ride.vehicle.user, cancel_message(@ride, @user))
+    @ride.users.delete(current_user)
+    notify(@ride.vehicle.user, cancel_message(@ride, current_user))
     flash[:success] = 'Ride cancelled. What\'s up?'
     redirect_to rides_path
   end
@@ -71,38 +64,8 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
   end
 
-  def find_current_user
-    @user = User.find(current_user)
-  end
-
   def ride_save_success(message = nil)
     flash[:success] = message || 'Ride saved!'
-    redirect_to user_path(current_user)
-  end
-
-  def ride_booking_error
-    flash[:danger] = 'You can not book a ride you own.'
-    redirect_to rides_path
-  end
-
-  def ride_full_error
-    flash[:danger] = 'Sorry, ride\'s full.'
-    redirect_to rides_path
-  end
-
-  def vehicle_overload_error
-    flash[:danger] = 'Sorry, ride capacity cannot be greater than vehicle
-    capacity.'
-    redirect_to user_path(current_user)
-  end
-
-  def invalid_time_error
-    flash[:danger] = 'Rides should be at least 3 minutes from now.'
-    redirect_to user_path(current_user)
-  end
-
-  def rider_lacks_seating_error
-    flash[:danger] = 'Some rider(s) will lack seats.'
     redirect_to user_path(current_user)
   end
 

@@ -1,14 +1,14 @@
 <div class="notifications-icon">
   <%= image_tag "bell_icon.svg" %>
-  <span class="badge"><%= @user.notifications.where(read: false).count %></span>
+  <span class="badge"><%= current_user.notifications.where(read: false).count %></span>
   <div class="notifications-dropdown">
     <%= link_to "Mark all as read", mark_as_read_path, remote: true, class: "mark-read" %>
-    <% if @user.notifications.where(read: false).empty? %>
+    <% if current_user.notifications.where(read: false).empty? %>
       <div class="notification" style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
         Nothing's happened yet! :-)
       </div>
     <% else %>
-      <% @user.notifications.where(read: false).each do |notification| %>
+      <% current_user.notifications.where(read: false).each do |notification| %>
         <div class="notification"><%= notification.message %></div>
       <% end %>
     <% end %>

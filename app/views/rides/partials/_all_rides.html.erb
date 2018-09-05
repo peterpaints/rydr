@@ -4,6 +4,6 @@
   </p>
 <% else %>
   <% @rides.each do |ride| %>
-    <%= render partial: "rides/partials/ride", locals: {user: @user, ride: ride} %>
+    <%= render partial: "rides/partials/ride", locals: {user: current_user, ride: ride} %>
   <% end %>
 <% end %>

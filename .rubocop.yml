@@ -7,6 +7,8 @@ AllCops:
     - 'app/assets/**/*'
     - 'app/views/**/*'
     - 'bin/**/*'
+    - 'config/**/*'
     - '**/*.yml'
+    - '**/Rakefile'
 Documentation:
   Enabled: false

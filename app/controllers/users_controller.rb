@@ -18,15 +18,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    restrict_access unless @user.id == current_user
+    restrict_access unless @user == current_user
   end
 
   def update
     if @user.update(user_params)
       flash[:success] = 'Settings updated!'
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user.id)
     else
-      user_save_error(@user, user_path(current_user))
+      user_save_error(@user, user_path(current_user.id))
     end
   end
 

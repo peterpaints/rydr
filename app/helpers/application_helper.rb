@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def current_user
-    session[:user]
+    @current_user ||= User.find(session[:user]) if session[:user]
   end
 
   def require_login
