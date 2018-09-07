@@ -48,14 +48,11 @@ class RidesController < ApplicationController
   end
 
   def destroy
-    if @ride.destroy
-      @ride.users.each do |user|
-        notify(user, destroy_message(@ride))
-      end
-      ride_save_success('Ride deleted. Now we have to walk?')
-    else
-      ride_save_error(@ride)
+    @ride.users.each do |user|
+      notify(user, destroy_message(@ride))
     end
+    @ride.destroy
+    ride_save_success('Ride deleted. Now we have to walk?')
   end
 
   private
