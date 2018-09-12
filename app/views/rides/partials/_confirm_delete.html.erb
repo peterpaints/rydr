@@ -1,0 +1,14 @@
+<div id="delete-ride-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-dismiss="modal">&times;</span>
+    <div class="modal-header">
+      <p class="modal-heading">Are you sure?</p>
+      <div class="modal-underline" />
+    </div>
+    <%= form_for :ride, method: :delete do |f| %>
+      <div class="submit-button">
+        <%= f.submit "Delete", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="tiles-rides user-rides" style="top: 0; left: 0;">
+  <% rides = current_user.vehicles.map(&:rides).flatten %>
+  <% if rides.empty? %>
+    <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
+      You have no rides yet. Add one below :-)
+    </p>
+  <% else %>
+    <% current_user.vehicles.each do |vehicle| %>
+      <% vehicle.rides.each do |ride| %>
+        <%= render partial: "rides/partials/ride", locals: {user: current_user, ride: ride} %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,97 @@
+<div class="tile-container-rides">
+  <span><i class="fa fa-check"></i></span>
+  <%= form_for :ride, url: ride_path(ride.id), html: {class: "tile"}, method: :patch do |f| %>
+    <div class="tile-title">
+      <div class="route">
+        <div class="from-to">
+          <%= image_tag "from.svg", title: "origin" %>
+          <%= f.text_field :origin, required: true, value: ride.origin %>
+        </div>
+        <div>to</div>
+        <div class="from-to">
+          <%= image_tag "to.svg", title: "destination" %>
+          <%= f.text_field :destination, required: true, value: ride.destination %>
+        </div>
+      </div>
+      <%= f.datetime_local_field :departure_time, class: "time", required: true,
+        value: ride.departure_time.strftime("%Y-%m-%dT%H:%M")
+      %>
+    </div>
+    <div class="tile-content">
+      <div class="ride-vehicle">
+        <%= image_tag "vehicle.svg" %>
+        <%= f.collection_select :vehicle_id, current_page?(rides_path) ? [ride.vehicle] : user.vehicles, :id, :license_plate,
+          {selected: ride.vehicle.id},
+          {class: "license-plate"}
+        %>
+      </div>
+      <div class="seating-capacity">
+        <%= image_tag "seats.svg" %>
+        <%= f.text_field :capacity, required: true,
+        class: "seats-left",
+        pattern: '^[0-9]$',
+        value: ride.capacity,
+        title: "Capacity must be a number, e.g. 5"
+        %>
+        <%= f.label :seats %>
+      </div>
+      <div class="seating-capacity">
+        <%= image_tag "capacity.svg" %>
+        <div class="seats-left"><%=ride.users.count%></div>
+        <div class="seats-left"><%=ride.users.count == 1 ? 'Rider' : 'Riders'%></div>
+        <% passengers = ride.users.map(&:email) %>
+        <% if passengers.any? %>
+          <ul class="tooltip-text">
+            <% passengers.each do |passenger| %>
+              <li><%= passenger.split('@')[0] %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="ride-color">
+        <%= image_tag "palette.svg" %>
+        <div class="ride-details"><%=ride.vehicle.color%> <%=ride.vehicle.make%> <%=ride.vehicle.model%></div>
+      </div>
+      <div class="ride-owner">
+        <% if current_page?(rides_path) %>
+          <div>by:</div>
+          <% if ride.vehicle.user != user %>
+            <div class="owner"><%=ride.vehicle.user.email.split('@')[0]%></div>
+          <% else %>
+            <div class="owner">you</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="ride-footer">
+      <div class="booked-btn update-btn" style="visibility: <%=ride.booked?(user) ? 'visible' : 'hidden' %>;">
+        <i class="fa fa-check-square"></i>
+        <div class="booked">You've booked this ride</div>
+      </div>
+      <div class="tile-update">
+        <div class="edit-btn update-btn">
+          <i class="fa fa-pencil"></i>
+          <div class="edit edit-ride">Edit</div>
+        </div>
+        <div class="update-btn">
+          <i class="fa fa-save"></i>
+          <%= f.submit "Save", class: "save" %>
+        </div>
+        <% if ride.vehicle.user != user %>
+          <div class="book-btn update-btn" style="display: <%=ride.booked?(user) ? 'none' : 'flex' %>;">
+            <i class="fa fa-car"></i>
+            <div class="edit-ride"><%= link_to "Book", book_ride_path(ride.id) %></div>
+          </div>
+        <% end %>
+        <div class="delete-btn update-btn">
+          <i class="fa fa-trash"></i>
+          <div class="delete-ride"><%= link_to 'Delete', "#", data: {toggle: "modal", target: "#delete-ride-modal", href: ride_path(ride.id)} %></div>
+        </div>
+        <div class="cancel-btn update-btn" style="display: <%=ride.booked?(user) ? 'flex' : 'none' %>;">
+          <i class="fa fa-ban"></i>
+          <div class="delete-ride"><%= link_to "Cancel", cancel_ride_path(ride.id) %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

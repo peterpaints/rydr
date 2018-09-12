@@ -1,0 +1,26 @@
+<div id="vehicle-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-dismiss="modal">&times;</span>
+    <div class="modal-header">
+      <p class="modal-heading">Add a Vehicle</p>
+      <div class="modal-underline" />
+    </div>
+    <%= form_for :vehicle, url: vehicles_path do |f| %>
+      <%= f.text_field :make, required: true, placeholder: "Make e.g. Toyota" %>
+      <%= f.text_field :model, required: true, placeholder: "Model e.g. Corolla" %>
+      <%= f.text_field :license_plate, required: true,
+      pattern: '^[A-Z]{3} [0-9]{3}[A-Z]{1}$',
+      placeholder: "License plate e.g. KCR 232C",
+      title: "License Plate must be in this format: KCR 232C"
+      %>
+      <%= f.text_field :capacity, required: true,
+      pattern: '^[0-9]$',
+      title: "Capacity must be a number, e.g. 5",
+      placeholder: "Capacity e.g. 5" %>
+      <%= f.text_field :color, required: true, placeholder: "Color e.g. White" %>
+      <div class="submit-button">
+        <%= f.submit "Add", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,14 @@
 {
   "name": "rydr",
   "private": true,
-  "dependencies": {}
+  "engines": {
+    "yarn": "^1.9.4"
+  },
+  "dependencies": {
+    "yarn": "^1.9.4"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-dev-server": "^3.1.6"
+  }
 }

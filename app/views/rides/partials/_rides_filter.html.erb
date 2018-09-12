@@ -1,0 +1,8 @@
+<span class="profile-setting vehicles">AVAILABLE RIDES</span>
+<button class="filter-button vehicles">
+  <span>Filter by </span><i class="fa fa-caret-down"></i>
+  <div class="filter-dropdown">
+    <%= link_to "Earliest added", rides_path(filter: 'asc'), remote: true, class: "filter-item date-added" %>
+    <%= link_to "Rides I've booked", rides_path(filter: 'mine'), remote: true, class: "filter-item booked-rides" %>
+  </div>
+</button>

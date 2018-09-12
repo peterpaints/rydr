@@ -1,0 +1,52 @@
+<div class="profile">
+  <%= render partial: "layouts/partials/side_nav" %>
+  <div class="right-container">
+    <%= render partial: "layouts/partials/top_nav" %>
+    <div class="content">
+      <div class="filters">
+        <div class="tabs">
+          <input id="tab1" type="radio" name="tabs" checked >
+          <label class="vehicles-nav" for="tab1">YOUR VEHICLES</label>
+          <input id="tab2" type="radio" name="tabs">
+          <label class="notifications-nav" for="tab2">CONTACT INFO</label>
+          <input id="tab3" type="radio" name="tabs">
+          <label class="ride-history-nav" for="tab3">OFFER A RIDE</label>
+        </div>
+        <!-- <button class="filter-button vehicles"><span>Filter by </span><i class="fa fa-caret-down"></i></button> -->
+      </div>
+      <div class="tiles-settings">
+        <div class="vehicle-tiles">
+          <% if current_user.vehicles.empty? %>
+            <p style="text-align: center; font-family: 'Gloria Hallelujah'; color: rgba(0, 0, 0, .6);">
+              You have no vehicles yet. Add one below :-)
+            </p>
+          <% else %>
+            <% current_user.vehicles.each do |vehicle| %>
+              <%= render partial: "users/partials/user_vehicle", locals: {vehicle: vehicle} %>
+            <% end %>
+          <% end %>
+        </div>
+        <%= render partial: "users/partials/user_notifications", locals: {user: current_user} %>
+        <%= render partial: "users/partials/user_rides" %>
+      </div>
+      <%= link_to "#", data: {toggle: "modal", target: "#vehicle-modal"} do %>
+        <button class="add-vehicle" type="button">+</button>
+      <% end %>
+      <%= link_to "#", data: {toggle: "modal", target: "#ride-modal"} do %>
+        <button class="add-ride" type="button">+</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/vehicle_form" %>
+</div>
+<div>
+  <%= render partial: "rides/partials/ride_form", user: current_user %>
+</div>
+<div>
+  <%= render partial: "rides/partials/confirm_delete" %>
+</div>
+<div>
+  <%= render partial: "vehicles/partials/confirm_delete" %>
+</div>

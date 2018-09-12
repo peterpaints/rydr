@@ -1,0 +1,423 @@
+$text-color: rgba(153, 123, 73, 1);
+$badge-color: rgba(228, 83, 94, .85);
+$card-borders: #ff8000, #8d230f, #665600;
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  width: 87vw;
+
+  .content {
+    background-color: rgba(248, 250, 251, .7);
+    height: 92.5vh;
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 7.5vh;
+  width: 75vw;
+  position: relative;
+  top: 3.5vh;
+  left: 5vw;
+
+  .profile-setting {
+    font-family: 'Cantarell', sans-serif;
+    font-size: 1vw;
+    color: $text-color;
+  }
+
+  .filter-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    border-radius: 30px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    height: 3vh;
+    width: 9vw;
+    font-family: 'Gloria Hallelujah', sans-serif;
+    font-size: 1vw;
+    color: rgba(0, 0, 0, .6);
+    outline: none;
+    padding: 0 2vw 0 2vw;
+  }
+
+  .filter-dropdown {
+      display: none;
+      position: absolute;
+      top: 5.5vh;
+      right: .5vw;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 9999;
+      background-color: rgba(248, 250, 251, .7);
+      width: 8vw;
+      height: 10vh;
+      padding: .5%;
+      font-family: 'Ubuntu';
+      font-size: .7vw;
+      text-align: left;
+
+      .filter-item {
+        width: 7.5vw;
+        height: 3vh;
+        float: none;
+        color: rgba(0, 0, 0, .7);
+        display: block;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        padding-top: 5%;
+        padding-bottom: 1%;
+        text-decoration: none;
+        outline: none;
+        cursor: pointer;
+        &:before {
+          font-family: 'FontAwesome';
+          margin-right: 10px;
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 1);
+          box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2);
+        }
+      }
+
+      .date-added {
+        &:before {
+          content: '\f161';
+        }
+      }
+
+      .booked-rides {
+        &:before {
+          content: '\f274';
+        }
+      }
+    }
+
+    .filter-button:hover .filter-dropdown {
+      display: block;
+    }
+}
+
+.tiles-rides {
+  // display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  height: 75vh;
+  width: 77vw;
+  position: relative;
+  top: 7.5vh;
+  left: 5vw;
+  overflow: scroll;
+
+  span {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid rgba(0, 0, 0, .25);
+    border-radius: 50%;
+    color: #fff;
+    padding: 0 3px 0 3px;
+    margin-left: 2vw;
+  }
+
+  .tile-container-rides {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 17vh;
+    width: 75vw;
+    margin-bottom: 3vh;
+    opacity: .9;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+    &:hover span {
+      background-color: #26B999;
+      border: 0;
+    }
+    &:hover span > i {
+      -webkit-text-stroke: 1px rgba(38, 185, 255, 1);
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-around;
+      height: 17vh;
+      width: 65vw;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+      font-family: 'Gloria Hallelujah', sans-serif;
+    }
+
+    .input-disabled, .save {
+      border: 0;
+      background-color: #fff;
+    }
+
+    .disabled-select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .disabled-time-picker {
+      padding-left: 15px !important;
+      width: 9.5vw !important;
+      &::-webkit-inner-spin-button,
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+      }
+    }
+
+    .tile-title {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .route {
+        display: flex;
+        flex-direction: row;
+        color: rgba(0, 0, 0, .4);
+        width: 33%;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 1vw;
+
+        .from-to {
+          display: flex;
+          flex-direction: row;
+          width: auto;
+          justify-content: space-between;
+          &:last-child {
+            margin-left: 3vw;
+          }
+
+          input {
+            margin-left: 1vw;
+            width: 6vw;
+          }
+        }
+      }
+
+      .time {
+        align-self: center;
+        border-radius: 25px;
+        height: 3vh;
+        width: 11vw;
+        text-align: center;
+        color: #f7f7f7;
+        padding: 4px 0 4px 0;
+        margin-right: 2vw;
+      }
+    }
+
+    .tile-content {
+      display: flex;
+      flex-direction: row;
+      width: 64vw;
+      align-items: center;
+
+      .ride-vehicle {
+        display: flex;
+        flex-direction: row;
+        color: rgba(0, 0, 0, .4);
+        width: auto;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 1vw;
+
+        .license-plate {
+          margin-left: 1vw;
+        }
+      }
+
+      .seating-capacity {
+        display: flex;
+        flex-direction: row;
+        color: rgba(0, 0, 0, .4);
+        width: auto;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 5vw;
+        position: relative;
+        input {
+          width: 2vw !important;
+        }
+
+        label {
+          margin-bottom: 0;
+          margin-left: -3px;
+        }
+
+        .seats-left {
+          margin-left: 1vw;
+        }
+
+        .tooltip-text {
+          visibility: hidden;
+          background-color: rgba(0, 0, 0, .8);
+          color: white;
+          font-family: 'Montserrat';
+          font-size: .75vw;
+          text-align: center;
+          border-radius: 6px;
+          width: 120px;
+          position: absolute;
+          z-index: 2;
+          padding: 5px 0;
+          top: 100%;
+          left: 50%;
+        }
+
+        &:hover .tooltip-text {
+          visibility: visible;
+        }
+      }
+
+      .ride-color {
+        display: flex;
+        flex-direction: row;
+        color: rgba(0, 0, 0, .4);
+        width: auto;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 5vw;
+
+        .ride-details {
+          margin-left: 1vw;
+        }
+      }
+
+      .ride-owner {
+        display: flex;
+        flex-direction: row;
+        color: rgba(0, 0, 0, .5);
+        width: auto;
+        align-items: center;
+        justify-content: space-between;
+        font-size: .75vw;
+        margin-left: auto;
+        margin-right: 2.3vw;
+        // font-family: 'Ubuntu';
+
+        .owner {
+          margin-left: .5vw;
+        }
+      }
+    }
+
+    .ride-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 64vw;
+
+      .booked-btn {
+        font-size: .6vw;
+        color: rgba(0, 0, 0, .7);
+        margin-left: 1.2vw;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .booked {
+          margin-left: .5vw;
+        }
+      }
+    }
+
+    .tile-update {
+      display: flex;
+      flex-direction: row;
+      align-self: flex-end;
+      justify-content: space-between;
+      width: 9vw;
+      margin-right: 1.5vw;
+      font-size: .9vw;
+
+      .book-btn, .cancel-btn {
+        margin-left: auto;
+        margin-right: 1vw;
+      }
+
+      .update-btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 4vw;
+        cursor: pointer;
+        &:first-child, .save {
+          width: 3.2vw;
+        }
+
+        i {
+          color: rgba(0, 0, 0, .5);
+        }
+
+        .edit-ride, .save, .delete-ride {
+          color: rgba(0, 0, 0, .5);
+          cursor: pointer;
+          &:hover, &:active, &:focus {
+            color: rgba(0, 0, 0, 1);
+            outline: none;
+            text-decoration: none;
+          }
+
+          a {
+            color: rgba(0, 0, 0, .5);
+            outline: none;
+            text-decoration: none;
+            &:hover {
+              color: rgba(0, 0, 0, 1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through length($card-borders) {
+    .tile-container-rides:nth-child(#{length($card-borders)}n+#{$i}) > .tile {
+        border-left: 5px solid nth($card-borders, $i);
+    }
+    .tile-container-rides:nth-child(#{length($card-borders)}n+#{$i}) > .tile > .tile-title > .time {
+        background-color: nth($card-borders, $i);
+    }
+  }
+}
+
+.all-rides {
+  .edit-btn, .delete-btn {
+    display: none !important;
+  }
+}
+
+.user-rides {
+  .book-btn, .cancel-btn {
+    display: none !important;
+  }
+}

@@ -1,0 +1,2 @@
+const notificationsBox = document.querySelector('.notifications-top-nav');
+notificationsBox.innerHTML = ("<%= escape_javascript(render partial: 'layouts/partials/notification_dropdown')%>");

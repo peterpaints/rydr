@@ -1,0 +1,234 @@
+.login-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-image: url(street.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  input {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      color: white;
+      border: none;
+      -webkit-text-fill-color: white;
+      transition: background-color 5000s ease-in-out 0s;
+      outline: none;
+    }
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  min-width: 25vw;
+  position: relative;
+  background: linear-gradient(to bottom right, rgba(82, 88, 88, .8), rgba(73, 54, 32, .8), rgba(101, 71, 38, .8), rgba(229, 134, 47, .8));
+  border-radius: 1rem;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  z-index: 1000;
+}
+
+.logo {
+  text-align: center;
+
+  img {
+    margin: 30% 0 0 0;
+  }
+
+  p {
+    color: #fff;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 5rem;
+  }
+}
+
+.email {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  top: 8vh;
+  min-width: 18vw;
+  height: 3vw;
+
+  input {
+    width: 20vw;
+    background: rgba(255, 255, 255, .25);
+    border: none;
+    border-radius: 25px;
+    padding-left: 6.5rem;
+    outline: none;
+    color: white;
+    font-size: 2rem;
+    margin-left: -1rem;
+    &::placeholder {
+      color: white;
+      font-family: 'Cantarell', sans-serif;
+      font-size: 2rem;
+    }
+  }
+
+  i {
+    position: relative;
+    font-size: 2rem;
+    color: white;
+    top: 1.63rem;
+    left: 4rem;
+  }
+}
+
+.password {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  top: 12vh;
+  min-width: 18vw;
+  height: 3vw;
+
+  input {
+    width: 20vw;
+    background: rgba(255, 255, 255, .25);
+    border: none;
+    border-radius: 25px;
+    padding-left: 6.5rem;
+    outline: none;
+    color: white;
+    font-size: 1.8rem;
+    margin-left: -1.5rem;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: white;
+      font-family: 'PT Sans';
+      font-size: 2rem;
+    }
+  }
+
+  i {
+    position: relative;
+    left: 4rem;
+    font-size: 2rem;
+    color: white;
+    top: 1.63rem;
+  }
+}
+
+.confirm-password {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  top: 12vh;
+  min-width: 18vw;
+  height: 3vw;
+  margin-top: 4vh;
+
+  input {
+    width: 20vw;
+    background: rgba(255, 255, 255, .25);
+    border: none;
+    border-radius: 25px;
+    padding-left: 6.5rem;
+    outline: none;
+    color: white;
+    font-size: 1.8rem;
+    margin-left: -1.5rem;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: white;
+      font-family: 'PT Sans';
+      font-size: 2rem;
+    }
+  }
+
+  i {
+    position: relative;
+    left: 4rem;
+    font-size: 2rem;
+    color: white;
+    top: 1.63rem;
+  }
+}
+
+.remember {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  top: 13vh;
+  left: 5vw;
+  text-align: center;
+  min-width: 18vw;
+  color: white;
+  margin-left: -1.5rem;
+
+  p {
+    margin-top: .25rem;
+    margin-left: 1rem;
+    font-size: 12px;
+  }
+}
+
+.login-button,
+.register-button {
+  text-align: center;
+  padding: 0%;
+  position: relative;
+  top: 18vh;
+  left: 6vw;
+  height: 6vh;
+  min-width: 13vw;
+  border: .5px solid rgba(255, 255, 255, .5);
+  border-radius: 30px;
+  font-family: 'Cantarell', sans-serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  background: linear-gradient(to bottom right, rgba(82, 88, 88, .8), rgba(73, 54, 32, .8), rgba(101, 71, 38, .8), rgba(229, 134, 47, .8));
+  z-index: 1001;
+  &:hover {
+    background: rgba(255, 255, 255, .1);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.toggle-register,
+.toggle-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  top: 23vh;
+  left: 6.7vw;
+  text-align: center;
+  min-width: 20vw;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.toggle-register a,
+.toggle-login a {
+  margin-left: 1rem;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.register-button {
+  top: 16vh;
+}
+
+.toggle-login {
+  top: 18vh;
+}

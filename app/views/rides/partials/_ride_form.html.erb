@@ -1,0 +1,27 @@
+<div id="ride-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-dismiss="modal">&times;</span>
+    <div class="modal-header">
+      <p class="modal-heading">Add a Ride</p>
+      <div class="modal-underline" />
+    </div>
+    <%= form_for :ride, url: rides_path do |f| %>
+      <%= f.text_field :origin, required: true, placeholder: "Where from e.g. Andela Kenya" %>
+      <%= f.text_field :destination, required: true, placeholder: "Where to e.g. Westlands" %>
+      <%= f.datetime_local_field :departure_time, required: true,
+        value: Time.now.localtime.strftime("%Y-%m-%dT%H:%M")
+      %>
+      <%= f.text_field :capacity, required: true,
+      pattern: '^[0-9]$',
+      title: "Capacity must be a number, e.g. 5",
+      placeholder: "Capacity e.g. 5" %>
+      <%= f.collection_select :vehicle_id, current_user.vehicles, :id, :license_plate,
+        {prompt: "Select a Car"},
+        {required: true}
+      %>
+      <div class="submit-button">
+        <%= f.submit "Add", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>
